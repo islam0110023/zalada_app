@@ -165,8 +165,7 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                       Row(
                         children: [
-                          SizedBox(
-                            width: 90.w,
+                          Expanded(
                             child: Divider(
                               color: AppColors.borderColor,
                               thickness: 1.sp,
@@ -187,8 +186,7 @@ class _LoginPageState extends State<LoginPage> {
                           SizedBox(
                             width: 15.w,
                           ),
-                          SizedBox(
-                            width: 90.w,
+                          Expanded(
                             child: Divider(
                               color: AppColors.borderColor,
                               thickness: 1.sp,

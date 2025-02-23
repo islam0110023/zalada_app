@@ -53,7 +53,7 @@ class OnboardingPage extends StatelessWidget {
                   height: 55.h,
                   width: double.infinity,
                 ),
-                SvgPicture.asset(ListData.onboardingList[state].image),
+                Flexible(child: SvgPicture.asset(ListData.onboardingList[state].image,width: 299.r,height: 299.r,)),
                 SizedBox(
                   height: 40.h,
                 ),
@@ -84,8 +84,8 @@ class OnboardingPage extends StatelessWidget {
                   height: 32.h,
                 ),
                 SizedBox(
-                  height: 94.h,
-                  width: 94.w,
+                  height: 94.r,
+                  width: 94.r,
                   child: Stack(
                     children: [
                       Align(
@@ -99,8 +99,8 @@ class OnboardingPage extends StatelessWidget {
                       Align(
                         alignment: Alignment.center,
                         child: Container(
-                          width: 62.w,
-                          height: 62.h,
+                          width: 62.r,
+                          height: 62.r,
                           decoration: ShapeDecoration(
                             color: AppColors.containerColorOnboarding,
                             shape: RoundedRectangleBorder(
