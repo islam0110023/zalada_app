@@ -19,7 +19,7 @@ class CustomSliverGrid extends StatelessWidget {
           crossAxisCount: 2,
           crossAxisSpacing: 16.w,
           mainAxisSpacing: 10.h,
-          childAspectRatio: 159.w/220.h,
+          childAspectRatio: 159.w/230.h,
         ),
         itemBuilder: (context, index) {
           return CustomProduct(productModel: products[index],);

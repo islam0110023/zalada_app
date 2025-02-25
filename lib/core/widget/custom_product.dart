@@ -18,7 +18,7 @@ class CustomProduct extends StatelessWidget {
       },
       child: SizedBox(
         width: 159.w,
-        height: 220.h,
+        height: 215.h,
         child: Stack(
           clipBehavior: Clip.none,
           children: [
@@ -26,7 +26,7 @@ class CustomProduct extends StatelessWidget {
               alignment: Alignment.bottomCenter,
               child: Container(
                 width: 159.w,
-                height: 190.h,
+                height: 200.h,
                 padding: EdgeInsets.only(
                   top: 102.r,
                   left: 12.r,
@@ -53,7 +53,7 @@ class CustomProduct extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
-                      productModel.title!,
+                      productModel.title,
                       overflow: TextOverflow.ellipsis,
                       maxLines: 2,
                       textAlign: TextAlign.center,
@@ -78,11 +78,11 @@ class CustomProduct extends StatelessWidget {
               ),
             ),
             Positioned(
-              top: 75,
-              left: 40,
+              top: 75.h,
+              left: 40.w,
               child: Container(
-                width: 100,
-                height: 60,
+                width: 100.w,
+                height: 60.h,
                 decoration: BoxDecoration(boxShadow: [
                   BoxShadow(
                     color: AppColors.textColorBlack.withOpacity(.3),
@@ -93,6 +93,7 @@ class CustomProduct extends StatelessWidget {
               ),
             ),
             Positioned(
+             // bottom: 130.h,
                 left: 18.5.w,
                 child: CachedNetworkImage(
                   imageUrl: productModel.image!,

@@ -46,7 +46,7 @@ class CustomTextInput extends StatelessWidget {
           cursorColor: AppColors.hintColor,
           controller: controller,
           style: GoogleFonts.plusJakartaSans(
-            color: AppColors.hintColor,
+            color: AppColors.textColorBlack,
             fontSize: 16.sp,
             fontWeight: FontWeight.w400,
             height: 1.50.h,
