@@ -10,8 +10,14 @@ class ProductDetailsCubit extends Cubit<ProductDetailsState> {
   ProductDetailsCubit() : super(ProductDetailsInitial());
   List<Product> favorites = [];
   Future<void> loadFavorites() async {
+    emit(FavoriteLoading());
     favorites = await SQLHelper.getFavorites();
-    emit(FavoriteLoaded());
+
+    if (favorites.isNotEmpty) {
+      emit(FavoriteLoaded());
+    } else {
+      emit(FavoriteNon());
+    }
   }
 
   Future<void> addAndRemoveFavorite(FavoriteModelDb product) async {
@@ -22,8 +28,9 @@ class ProductDetailsCubit extends Cubit<ProductDetailsState> {
       await SQLHelper.addToFavorites(product);
       favorites.add(product);
     }
-    emit(FavoriteLoaded());
+    loadFavorites();
   }
+
   bool isFavorite(String productId) {
     return favorites.any((item) => item.id == productId);
   }
