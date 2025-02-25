@@ -9,7 +9,7 @@ part 'home_state.dart';
 
 class HomeCubit extends Cubit<HomeState> {
   HomeCubit() : super(HomeInitial());
-  List<ProductModel> products = [];
+  List<Product> products = [];
 
   getProducts() async {
     emit(HomeProductLoading());

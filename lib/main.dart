@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:zalada_app/core/db/cache_helper/cache_helper.dart';
+import 'package:zalada_app/core/db/db_helper/local_db_helper.dart';
 import 'package:zalada_app/core/network/dio_helper.dart';
 import 'package:zalada_app/feature/auth/presentation/login_page.dart';
 import 'package:zalada_app/feature/auth/presentation/register_page.dart';
@@ -18,6 +19,7 @@ void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   DioHelper.init();
   await CacheHelper.init();
+  await SQLHelper.initDb();
   runApp(const MyApp());
 }
 

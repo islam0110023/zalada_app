@@ -8,7 +8,7 @@ import 'package:zalada_app/feature/product_details/presentation/product_details.
 
 class CustomProduct extends StatelessWidget {
   const CustomProduct({super.key, required this.productModel});
-  final ProductModel productModel;
+  final Product productModel;
 
   @override
   Widget build(BuildContext context) {
@@ -40,10 +40,10 @@ class CustomProduct extends StatelessWidget {
                   ),
                   shadows: [
                     BoxShadow(
-                      color: Color(0x5E566E84),
-                      blurRadius: 40.r,
+                      color: Color(0x35566E84),
+                      blurRadius: 10.r,
                       offset: Offset(0, 10),
-                      spreadRadius: -12,
+                      spreadRadius: -8,
                     )
                   ],
                 ),
