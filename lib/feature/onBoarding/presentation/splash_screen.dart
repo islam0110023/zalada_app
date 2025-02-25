@@ -21,7 +21,7 @@ class _SplashScreenState extends State<SplashScreen> {
     // TODO: implement initState
     super.initState();
     Future.delayed(
-      Duration(seconds: 6),
+      5500.ms,
       () {
         if (CacheHelper.getData(key: "token") != null) {
           Navigator.pushNamedAndRemoveUntil(

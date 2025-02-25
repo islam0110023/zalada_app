@@ -39,7 +39,7 @@ class _HomePageState extends State<HomePage> {
       create: (context) => HomeCubit()..getProducts(),
       child: Scaffold(
         body: AnimatedSwitcher(
-          duration: 800.ms,
+          duration: 700.ms,
           transitionBuilder: (child, animation) {
             return child
                 .animate()
@@ -88,6 +88,6 @@ class _HomePageState extends State<HomePage> {
     )
         .animate()
         .fadeIn(duration: 1500.ms)
-        .slideX(begin: -1, end: 0, duration: 800.ms);
+        .slideX(begin: -1, end: 0, duration: 1200.ms);
   }
 }
