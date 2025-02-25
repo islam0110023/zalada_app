@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:zalada_app/core/constants/app_colors.dart';
 import 'package:zalada_app/core/widget/custom_sliver_grid.dart';
+import 'package:zalada_app/feature/home/logic/home_cubit.dart';
 import 'package:zalada_app/feature/search/presentation/search_product_page.dart';
 
 class SearchPage extends StatelessWidget {
@@ -64,7 +66,30 @@ class SearchPage extends StatelessWidget {
             height: 12.h,
           ),
         ),
-        CustomSliverGrid()
+        BlocBuilder<HomeCubit, HomeState>(
+          builder: (context, state) {
+            var cubit=BlocProvider.of<HomeCubit>(context);
+
+            if (state is HomeProductLoading) {
+              return SliverFillRemaining(
+                  child: Center(
+                    child: CircularProgressIndicator(),
+                  ));
+            } else if (state is HomeProductLoaded) {
+              return CustomSliverGrid(
+                products: cubit.products,
+              );
+            } else if (state is HomeProductFailure) {
+              return SliverFillRemaining(
+                child: Text(state.error),
+              );
+            } else {
+              return SliverFillRemaining(
+                child: Text("error"),
+              );
+            }
+          },
+        )
       ],
     );
   }

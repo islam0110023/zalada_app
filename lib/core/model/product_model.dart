@@ -1,4 +1,12 @@
-class ProductModel {
+abstract class Product {
+  String get id;
+  String get title;
+  String get image;
+  num get price;
+   String get description;
+
+}
+class ProductModel extends Product{
   ProductModel({
     required this.id,
     required this.title,
@@ -9,17 +17,17 @@ class ProductModel {
     required this.rating,
   });
 
-  final int? id;
-  final String? title;
-  final num? price;
-  final String? description;
+  final String id;
+  final String title;
+  final num price;
+  final String description;
   final String? category;
-  final String? image;
+  final String image;
   final Rating? rating;
 
   factory ProductModel.fromJson( json){
     return ProductModel(
-      id: json["id"],
+      id: json["id"].toString(),
       title: json["title"],
       price: json["price"],
       description: json["description"],

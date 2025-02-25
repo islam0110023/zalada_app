@@ -262,7 +262,7 @@ class _HomeScreenState extends State<HomeScreen>
         ),
         SliverToBoxAdapter(
           child: SizedBox(
-            height: 30.h,
+            height: 5.h,
           ),
         ),
         SliverToBoxAdapter(
@@ -395,13 +395,17 @@ class _HomeScreenState extends State<HomeScreen>
         ),
         BlocBuilder<HomeCubit, HomeState>(
           builder: (context, state) {
+            var cubit=BlocProvider.of<HomeCubit>(context);
+
             if (state is HomeProductLoading) {
               return SliverFillRemaining(
                   child: Center(
                 child: CircularProgressIndicator(),
               ));
             } else if (state is HomeProductLoaded) {
-              return CustomSliverGrid();
+              return CustomSliverGrid(
+                products: cubit.products,
+              );
             } else if (state is HomeProductFailure) {
               return SliverFillRemaining(
                 child: Text(state.error),
