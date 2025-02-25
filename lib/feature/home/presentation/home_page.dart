@@ -23,6 +23,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int index = 0;
+  int previousIndex = 0;
   List<Widget> pages = [
     HomeScreen(),
     SearchPage(),
@@ -33,12 +34,23 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    bool isForward = index < previousIndex;
     return BlocProvider(
       create: (context) => HomeCubit()..getProducts(),
       child: Scaffold(
-        body: pages[index],
+        body: AnimatedSwitcher(
+          duration: 800.ms,
+          transitionBuilder: (child, animation) {
+            return child
+                .animate()
+                .fade(duration: 1000.ms)
+                .slideX(begin: isForward ? 1 : -1, end: 0, duration: 800.ms);
+          },
+          child: pages[index],
+        ),
         bottomNavigationBar: BottomNavigationBar(
           onTap: (value) {
+            previousIndex = index;
             index = value;
             setState(() {});
           },
