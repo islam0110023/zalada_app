@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:zalada_app/core/constants/app_colors.dart';
+import 'package:zalada_app/feature/home/presentation/notification_page.dart';
 
 class CustomHomeListTile extends StatelessWidget {
   const CustomHomeListTile({super.key});
@@ -47,20 +48,25 @@ class CustomHomeListTile extends StatelessWidget {
       trailing: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Container(
-            width: 44.r,
-            height: 44.r,
-            padding: EdgeInsets.all(10.r),
-            decoration: ShapeDecoration(
-              color: AppColors.primaryColor
-                  .withOpacity(0.20000000298023224),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(34.r),
+          InkWell(
+            onTap: () {
+              Navigator.pushNamed(context, NotificationPage.id);
+            },
+            child: Container(
+              width: 44.r,
+              height: 44.r,
+              padding: EdgeInsets.all(10.r),
+              decoration: ShapeDecoration(
+                color: AppColors.primaryColor
+                    .withOpacity(0.20000000298023224),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(34.r),
+                ),
               ),
-            ),
-            child: Icon(
-              Icons.notifications,
-              color: AppColors.primaryColor,
+              child: Icon(
+                Icons.notifications,
+                color: AppColors.primaryColor,
+              ),
             ),
           ),
           SizedBox(
