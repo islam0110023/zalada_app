@@ -68,164 +68,166 @@ class _LoginPageState extends State<LoginPage> {
                 inAsyncCall: isLoading,
                 child: Padding(
                   padding: EdgeInsets.symmetric(horizontal: 20.r),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SizedBox(
-                        height: 24.h,
-                      ),
-                      SizedBox(
-                        height: 75.h,
-                        child: DefaultTextStyle(
-                          style: GoogleFonts.plusJakartaSans(
-                            color: Colors.black,
-                            fontSize: 32.sp,
-                            height: 1.12.h,
-                            fontWeight: FontWeight.w600,
-                          ),
-                          child: AnimatedTextKit(
-                            animatedTexts: [
-                              TyperAnimatedText("Login to your\naccount.",
-                                  speed: Duration(milliseconds: 100)),
-                            ],
-                            repeatForever: true,
-                          ),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          height: 24.h,
                         ),
-                      ),
-                      SizedBox(
-                        height: 32.h,
-                      ),
-                      CustomTextInput(
-                        label: "Email Address",
-                        hint: "Email address",
-                        controller: emailController,
-                        onTap: () {},
-                      ),
-                      SizedBox(
-                        height: 16.h,
-                      ),
-                      CustomTextInput(
-                        label: "Password",
-                        hint: "Password",
-                        controller: passwordController,
-                        isPass: cubit.isPass,
-                        isEmail: false,
-                        onTap: () {
-                          cubit.obscureText();
-                        },
-                      ),
-                      SizedBox(
-                        height: 24.h,
-                      ),
-                      Align(
-                        alignment: Alignment.center,
-                        child: InkWell(
-                          onTap: () {
-                            showModalBottomSheet(
-                              context: context,
-                              backgroundColor: Colors.transparent,
-                              transitionAnimationController:
-                                  AnimationController(
-                                vsync: Navigator.of(context),
-                                duration: Duration(milliseconds: 999),
-                                reverseDuration: Duration(milliseconds: 999),
-                              ),
-                              builder: (context) {
-                                return CustomBottomSheet()
-                                    .animate()
-                                    .fade(duration: 999.ms)
-                                    .slideY(begin: 1, end: 0, duration: 800.ms);
-                              },
-                            );
-                          },
-                          child: Text(
-                            "Forget password?",
+                        SizedBox(
+                          height: 85.h,
+                          child: DefaultTextStyle(
                             style: GoogleFonts.plusJakartaSans(
-                              color: AppColors.textColorBlack,
-                              fontSize: 16.sp,
-                              fontWeight: FontWeight.w400,
-                              height: 1.50.h,
+                              color: Colors.black,
+                              fontSize: 32.sp,
+                              height: 1.12.h,
+                              fontWeight: FontWeight.w600,
+                            ),
+                            child: AnimatedTextKit(
+                              animatedTexts: [
+                                TyperAnimatedText("Login to your\naccount.",
+                                    speed: Duration(milliseconds: 100)),
+                              ],
+                              repeatForever: true,
                             ),
                           ),
                         ),
-                      ),
-                      SizedBox(
-                        height: 24.h,
-                      ),
-                      CustomButton(
-                        name: "Login",
-                        onPressed: () {
-                          cubit.login(
-                              userName: emailController.text,
-                              password: passwordController.text);
-                        },
-                      ),
-                      SizedBox(
-                        height: 24.h,
-                      ),
-                      Row(
-                        children: [
-                          Expanded(
-                            child: Divider(
-                              color: AppColors.borderColor,
-                              thickness: 1.sp,
-                            ),
-                          ),
-                          SizedBox(
-                            width: 14.w,
-                          ),
-                          Text(
-                            "or continue with",
-                            style: GoogleFonts.plusJakartaSans(
-                              color: AppColors.textColorSecond,
-                              fontSize: 16.sp,
-                              fontWeight: FontWeight.w500,
-                              height: 1.50.h,
-                            ),
-                          ),
-                          SizedBox(
-                            width: 15.w,
-                          ),
-                          Expanded(
-                            child: Divider(
-                              color: AppColors.borderColor,
-                              thickness: 1.sp,
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 24.h,
-                      ),
-                      Align(
-                        alignment: Alignment.center,
-                        child: InkWell(
+                        SizedBox(
+                          height: 32.h,
+                        ),
+                        CustomTextInput(
+                          label: "Email Address",
+                          hint: "Email address",
+                          controller: emailController,
+                          onTap: () {},
+                        ),
+                        SizedBox(
+                          height: 16.h,
+                        ),
+                        CustomTextInput(
+                          label: "Password",
+                          hint: "Password",
+                          controller: passwordController,
+                          isPass: cubit.isPass,
+                          isEmail: false,
                           onTap: () {
-                            Navigator.pushReplacementNamed(
-                                context, RegisterPage.id);
+                            cubit.obscureText();
                           },
-                          child: Text.rich(TextSpan(children: [
-                            TextSpan(
-                              text: "Don't have an account? ",
+                        ),
+                        SizedBox(
+                          height: 24.h,
+                        ),
+                        Align(
+                          alignment: Alignment.center,
+                          child: InkWell(
+                            onTap: () {
+                              showModalBottomSheet(
+                                context: context,
+                                backgroundColor: Colors.transparent,
+                                transitionAnimationController:
+                                    AnimationController(
+                                  vsync: Navigator.of(context),
+                                  duration: Duration(milliseconds: 999),
+                                  reverseDuration: Duration(milliseconds: 999),
+                                ),
+                                builder: (context) {
+                                  return CustomBottomSheet()
+                                      .animate()
+                                      .fade(duration: 999.ms)
+                                      .slideY(begin: 1, end: 0, duration: 800.ms);
+                                },
+                              );
+                            },
+                            child: Text(
+                              "Forget password?",
                               style: GoogleFonts.plusJakartaSans(
-                                color: Color(0xFF7C7D81),
+                                color: AppColors.textColorBlack,
                                 fontSize: 16.sp,
                                 fontWeight: FontWeight.w400,
                                 height: 1.50.h,
                               ),
                             ),
-                            TextSpan(
-                                text: "Register",
-                                style: GoogleFonts.plusJakartaSans(
-                                  color: AppColors.textColorThree,
-                                  fontSize: 16.sp,
-                                  fontWeight: FontWeight.w600,
-                                  height: 1.50.h,
-                                ))
-                          ])),
+                          ),
                         ),
-                      ),
-                    ],
+                        SizedBox(
+                          height: 24.h,
+                        ),
+                        CustomButton(
+                          name: "Login",
+                          onPressed: () {
+                            cubit.login(
+                                userName: emailController.text,
+                                password: passwordController.text);
+                          },
+                        ),
+                        SizedBox(
+                          height: 24.h,
+                        ),
+                        Row(
+                          children: [
+                            Expanded(
+                              child: Divider(
+                                color: AppColors.borderColor,
+                                thickness: 1.sp,
+                              ),
+                            ),
+                            SizedBox(
+                              width: 14.w,
+                            ),
+                            Text(
+                              "or continue with",
+                              style: GoogleFonts.plusJakartaSans(
+                                color: AppColors.textColorSecond,
+                                fontSize: 16.sp,
+                                fontWeight: FontWeight.w500,
+                                height: 1.50.h,
+                              ),
+                            ),
+                            SizedBox(
+                              width: 15.w,
+                            ),
+                            Expanded(
+                              child: Divider(
+                                color: AppColors.borderColor,
+                                thickness: 1.sp,
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 24.h,
+                        ),
+                        Align(
+                          alignment: Alignment.center,
+                          child: InkWell(
+                            onTap: () {
+                              Navigator.pushReplacementNamed(
+                                  context, RegisterPage.id);
+                            },
+                            child: Text.rich(TextSpan(children: [
+                              TextSpan(
+                                text: "Don't have an account? ",
+                                style: GoogleFonts.plusJakartaSans(
+                                  color: Color(0xFF7C7D81),
+                                  fontSize: 16.sp,
+                                  fontWeight: FontWeight.w400,
+                                  height: 1.50.h,
+                                ),
+                              ),
+                              TextSpan(
+                                  text: "Register",
+                                  style: GoogleFonts.plusJakartaSans(
+                                    color: AppColors.textColorThree,
+                                    fontSize: 16.sp,
+                                    fontWeight: FontWeight.w600,
+                                    height: 1.50.h,
+                                  ))
+                            ])),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               );

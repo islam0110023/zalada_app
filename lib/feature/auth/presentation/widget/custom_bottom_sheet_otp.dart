@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:zalada_app/core/constants/app_colors.dart';
 import 'package:zalada_app/core/widget/custom_button.dart';
+import 'package:zalada_app/feature/auth/presentation/login_page.dart';
 import 'package:zalada_app/feature/home/presentation/home_page.dart';
 
 class CustomBottomSheetOtp extends StatelessWidget {
@@ -76,7 +77,7 @@ class CustomBottomSheetOtp extends StatelessWidget {
             onPressed: () {
               Navigator.pushNamedAndRemoveUntil(
                 context,
-                HomePage.id,
+                LoginPage.id,
                 (route) => false,
               );
             },

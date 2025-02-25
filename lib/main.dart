@@ -12,6 +12,8 @@ import 'package:zalada_app/feature/onBoarding/presentation/onboarding_page.dart'
 import 'package:zalada_app/feature/onBoarding/presentation/splash_screen.dart';
 import 'package:zalada_app/feature/product_details/logic/product_details_cubit.dart';
 import 'package:zalada_app/feature/product_details/presentation/product_details.dart';
+import 'package:zalada_app/feature/profile/presentation/edit_profile.dart';
+import 'package:zalada_app/feature/profile/presentation/payment_method_page.dart';
 import 'package:zalada_app/feature/search/presentation/search_product_page.dart';
 
 import 'feature/auth/presentation/otp_page.dart';
@@ -56,6 +58,8 @@ class MyApp extends StatelessWidget {
             SearchProductPage.id: (context) => SearchProductPage(),
             NotificationPage.id: (context) => NotificationPage(),
             ProductDetails.id: (context) => ProductDetails(),
+            EditProfile.id: (context) => EditProfile(),
+            PaymentMethodPage.id: (context) => PaymentMethodPage(),
 
           },
           initialRoute: SplashScreen.id,
