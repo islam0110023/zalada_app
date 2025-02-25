@@ -35,10 +35,10 @@ class CustomProduct extends StatelessWidget {
                 ),
                 shadows: [
                   BoxShadow(
-                    color: Color(0x11566E84),
-                    blurRadius: 32.sp,
-                    offset: Offset(0, 20),
-                    spreadRadius: -8,
+                    color: Color(0x5E566E84),
+                    blurRadius: 40.r,
+                    offset: Offset(0, 10),
+                    spreadRadius: -12,
                   )
                 ],
               ),
@@ -81,13 +81,13 @@ class CustomProduct extends StatelessWidget {
                 BoxShadow(
                   color: AppColors.textColorBlack.withOpacity(.3),
                   spreadRadius: -5,
-                  blurRadius: 35,
+                  blurRadius: 35.r,
                 )
               ]),
             ),
           ),
           Positioned(
-              left: 18.5,
+              left: 18.5.w,
               child: CachedNetworkImage(
                 imageUrl: productModel.image!,
                 height: 130.h,
