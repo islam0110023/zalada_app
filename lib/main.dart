@@ -8,6 +8,7 @@ import 'package:zalada_app/feature/auth/presentation/register_page.dart';
 import 'package:zalada_app/feature/home/presentation/notification_page.dart';
 import 'package:zalada_app/feature/onBoarding/presentation/onboarding_page.dart';
 import 'package:zalada_app/feature/onBoarding/presentation/splash_screen.dart';
+import 'package:zalada_app/feature/product_details/presentation/product_details.dart';
 import 'package:zalada_app/feature/search/presentation/search_product_page.dart';
 
 import 'feature/auth/presentation/otp_page.dart';
@@ -48,6 +49,7 @@ class MyApp extends StatelessWidget {
           HomePage.id:(context)=>HomePage(),
           SearchProductPage.id:(context)=>SearchProductPage(),
           NotificationPage.id:(context)=>NotificationPage(),
+          ProductDetails.id:(context)=>ProductDetails(),
 
         },
         initialRoute:SplashScreen.id ,
