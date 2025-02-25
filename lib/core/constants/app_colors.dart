@@ -14,5 +14,6 @@ class AppColors {
   static Color logoutColor=Color(0xFFFF5843);
   static Color containerColorSecond=Color(0xFFF3F6FB);
   static Color containerColorThree=Color(0xFFF2F2F2);
+  static Color  sliderColor=Color(0xFFFF9C44);
 
 }

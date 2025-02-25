@@ -23,7 +23,7 @@ class SearchPage extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: 20.r),
             child: TextFormField(
               onFieldSubmitted: (value) {
-                Navigator.pushNamed(context, SearchProductPage.id);
+                Navigator.pushNamed(context, SearchProductPage.id,arguments: value);
 
               },
               decoration: InputDecoration(
