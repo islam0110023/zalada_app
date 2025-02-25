@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:zalada_app/core/db/cache_helper/cache_helper.dart';
 import 'package:zalada_app/core/network/dio_helper.dart';
 import 'package:zalada_app/feature/auth/presentation/login_page.dart';
 import 'package:zalada_app/feature/auth/presentation/register_page.dart';
+import 'package:zalada_app/feature/home/presentation/notification_page.dart';
 import 'package:zalada_app/feature/onBoarding/presentation/onboarding_page.dart';
 import 'package:zalada_app/feature/onBoarding/presentation/splash_screen.dart';
 import 'package:zalada_app/feature/search/presentation/search_product_page.dart';
@@ -44,7 +46,8 @@ class MyApp extends StatelessWidget {
           RegisterPage.id:(context)=>RegisterPage(),
           OtpPage.id:(context)=>OtpPage(),
           HomePage.id:(context)=>HomePage(),
-          SearchProductPage.id:(context)=>SearchProductPage()
+          SearchProductPage.id:(context)=>SearchProductPage(),
+          NotificationPage.id:(context)=>NotificationPage(),
 
         },
         initialRoute:SplashScreen.id ,

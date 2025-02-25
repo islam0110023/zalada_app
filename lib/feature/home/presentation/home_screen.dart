@@ -245,21 +245,21 @@ class _HomeScreenState extends State<HomeScreen>
             if (state is HomeProductLoading) {
               return SliverFillRemaining(
                   child: Center(
-                    child: CircularProgressIndicator(),
-                  ));
-            }
-            else if (state is HomeProductLoaded) {
-              return         CustomListViewProduct();
-            }
-            else if(state is HomeProductFailure){
-              return SliverFillRemaining(child: Text(state.error),);
-            }
-            else{
-              return SliverFillRemaining(child: Text("error"),);
+                child: CircularProgressIndicator(),
+              ));
+            } else if (state is HomeProductLoaded) {
+              return CustomListViewProduct();
+            } else if (state is HomeProductFailure) {
+              return SliverFillRemaining(
+                child: Text(state.error),
+              );
+            } else {
+              return SliverFillRemaining(
+                child: Text("error"),
+              );
             }
           },
         ),
-
         SliverToBoxAdapter(
           child: SizedBox(
             height: 30.h,
@@ -400,15 +400,16 @@ class _HomeScreenState extends State<HomeScreen>
                   child: Center(
                 child: CircularProgressIndicator(),
               ));
-            }
-           else if (state is HomeProductLoaded) {
+            } else if (state is HomeProductLoaded) {
               return CustomSliverGrid();
-            }
-            else if(state is HomeProductFailure){
-              return SliverFillRemaining(child: Text(state.error),);
-            }
-            else{
-              return SliverFillRemaining(child: Text("error"),);
+            } else if (state is HomeProductFailure) {
+              return SliverFillRemaining(
+                child: Text(state.error),
+              );
+            } else {
+              return SliverFillRemaining(
+                child: Text("error"),
+              );
             }
           },
         )
@@ -416,4 +417,3 @@ class _HomeScreenState extends State<HomeScreen>
     );
   }
 }
-
