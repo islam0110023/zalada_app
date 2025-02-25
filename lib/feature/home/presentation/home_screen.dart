@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:zalada_app/core/constants/app_colors.dart';
+import 'package:zalada_app/core/widget/custom_list_view_product.dart';
 import 'package:zalada_app/core/widget/custom_product.dart';
+import 'package:zalada_app/core/widget/custom_sliver_grid.dart';
+import 'package:zalada_app/feature/home/logic/home_cubit.dart';
 import 'package:zalada_app/feature/home/presentation/widget/custom_home_list_tile.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -15,6 +19,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen>
     with SingleTickerProviderStateMixin {
   late TabController tabController;
+
   @override
   void initState() {
     // TODO: implement initState
@@ -235,27 +240,26 @@ class _HomeScreenState extends State<HomeScreen>
             ),
           ),
         ),
-        SliverToBoxAdapter(
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20.r),
-            child: SizedBox(
-              height: 220.h,
-              child: ListView.separated(
-                physics: BouncingScrollPhysics(),
-                scrollDirection: Axis.horizontal,
-                itemCount: 10,
-                itemBuilder: (context, index) {
-                  return CustomProduct();
-                },
-                separatorBuilder: (BuildContext context, int index) {
-                  return SizedBox(
-                    width: 10.w,
-                  );
-                },
-              ),
-            ),
-          ),
+        BlocBuilder<HomeCubit, HomeState>(
+          builder: (context, state) {
+            if (state is HomeProductLoading) {
+              return SliverFillRemaining(
+                  child: Center(
+                    child: CircularProgressIndicator(),
+                  ));
+            }
+            else if (state is HomeProductLoaded) {
+              return         CustomListViewProduct();
+            }
+            else if(state is HomeProductFailure){
+              return SliverFillRemaining(child: Text(state.error),);
+            }
+            else{
+              return SliverFillRemaining(child: Text("error"),);
+            }
+          },
         ),
+
         SliverToBoxAdapter(
           child: SizedBox(
             height: 30.h,
@@ -388,8 +392,28 @@ class _HomeScreenState extends State<HomeScreen>
               ),
             ],
           ),
+        ),
+        BlocBuilder<HomeCubit, HomeState>(
+          builder: (context, state) {
+            if (state is HomeProductLoading) {
+              return SliverFillRemaining(
+                  child: Center(
+                child: CircularProgressIndicator(),
+              ));
+            }
+           else if (state is HomeProductLoaded) {
+              return CustomSliverGrid();
+            }
+            else if(state is HomeProductFailure){
+              return SliverFillRemaining(child: Text(state.error),);
+            }
+            else{
+              return SliverFillRemaining(child: Text("error"),);
+            }
+          },
         )
       ],
     );
   }
 }
+
