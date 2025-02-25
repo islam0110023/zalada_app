@@ -50,6 +50,7 @@ class CustomProduct extends StatelessWidget {
                   Text(
                     productModel.title!,
                     overflow: TextOverflow.ellipsis,
+                    maxLines: 2,
                     textAlign: TextAlign.center,
                     style: GoogleFonts.plusJakartaSans(
                       color: AppColors.textColorBlack,
