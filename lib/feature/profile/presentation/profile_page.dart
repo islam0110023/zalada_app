@@ -7,6 +7,7 @@ import 'package:zalada_app/core/db/cache_helper/cache_helper.dart';
 import 'package:zalada_app/feature/auth/presentation/login_page.dart';
 import 'package:zalada_app/feature/profile/presentation/edit_profile.dart';
 import 'package:zalada_app/feature/profile/presentation/payment_method_page.dart';
+import 'package:zalada_app/feature/profile/presentation/privacy_policy.dart';
 import 'package:zalada_app/feature/profile/presentation/widget/custom_list_profile.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -213,7 +214,9 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                   CustomListProfile(
                       name: "Privacy Policy",
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.pushNamed(context, PrivacyPolicy.id);
+                      },
                       icon: CupertinoIcons.lock),
                   SizedBox(
                     height: 16.h,

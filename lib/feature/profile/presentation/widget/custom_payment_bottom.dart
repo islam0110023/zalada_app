@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:zalada_app/core/constants/app_colors.dart';
 import 'package:zalada_app/core/widget/custom_button.dart';
+import 'package:zalada_app/feature/profile/presentation/add_new_payment.dart';
 import 'package:zalada_app/feature/profile/presentation/widget/custom_list_tile_payment.dart';
 
 class CustomPaymentBottom extends StatelessWidget {
@@ -54,7 +55,7 @@ class CustomPaymentBottom extends StatelessWidget {
           CustomButton(
             name: "Continue",
             onPressed: () {
-              Navigator.pop(context);
+              Navigator.pushNamed(context, AddNewPayment.id);
             },
           ),
           SizedBox(
