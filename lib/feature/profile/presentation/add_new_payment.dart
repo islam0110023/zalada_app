@@ -1,18 +1,47 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:zalada_app/core/constants/app_colors.dart';
 import 'package:zalada_app/core/widget/custom_button.dart';
 import 'package:zalada_app/core/widget/custom_text_input.dart';
 
-class AddNewPayment extends StatelessWidget {
+class AddNewPayment extends StatefulWidget {
   AddNewPayment({super.key});
   static const id = "AddNewPayment";
+
+  @override
+  State<AddNewPayment> createState() => _AddNewPaymentState();
+}
+
+class _AddNewPaymentState extends State<AddNewPayment> {
   TextEditingController controller = TextEditingController(text: "Bryan Adam");
+
   TextEditingController controller1 =
       TextEditingController(text: "2727 8907 1278 3726");
-  TextEditingController controller2 = TextEditingController(text: "12/10/26");
+
+  TextEditingController controller2 = TextEditingController(text: "10/26");
+
   TextEditingController controller3 = TextEditingController(text: "778");
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    controller.addListener(
+      () {
+        setState(() {});
+      },
+    );
+    controller1.addListener(
+      () {
+        setState(() {});
+      },
+    );
+    controller2.addListener(() {
+      setState(() {});
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -86,6 +115,7 @@ class AddNewPayment extends StatelessWidget {
                     height: 16.h,
                   ),
                   CustomTextInput(
+                    maxLength: 16,
                     label: "Card Number",
                     hint: "Card Number",
                     controller: controller1,
@@ -98,6 +128,12 @@ class AddNewPayment extends StatelessWidget {
                     children: [
                       Expanded(
                         child: CustomTextInput(
+                          readOnly: true,
+                          onPressed: () {
+                            showDatePicker(context: context, firstDate: DateTime.now(),lastDate: DateTime(2031, 2, 26)).then((value) {
+                              controller2.text="${value!.month.toString().padLeft(2,"0")}/${value.year.toString().substring(2)}";
+                            },);
+                          },
                           label: "Expiry Date",
                           hint: "Expiry Date",
                           controller: controller2,
@@ -109,6 +145,7 @@ class AddNewPayment extends StatelessWidget {
                       ),
                       Expanded(
                         child: CustomTextInput(
+                          maxLength: 3,
                           label: "CVV",
                           hint: "CVV",
                           controller: controller3,
@@ -156,7 +193,7 @@ class AddNewPayment extends StatelessWidget {
             left: 44.w,
             top: 120,
             child: Text(
-              '2727  8907  1278  3726',
+              controller1.text,
               style: GoogleFonts.plusJakartaSans(
                 color: AppColors.primaryColor,
                 fontSize: 24.sp,
@@ -181,7 +218,7 @@ class AddNewPayment extends StatelessWidget {
             left: 44.w,
             top: 210.h,
             child: Text(
-              'Bryan Adam',
+              controller.text,
               style: GoogleFonts.plusJakartaSans(
                 color: AppColors.primaryColor,
                 fontSize: 14.sp,
@@ -207,7 +244,7 @@ class AddNewPayment extends StatelessWidget {
             left: 154.w,
             top: 210.h,
             child: Text(
-              '10 / 26',
+              '${controller2.text}',
               style: GoogleFonts.plusJakartaSans(
                 color: AppColors.primaryColor,
                 fontSize: 14.sp,
@@ -236,6 +273,8 @@ class AddNewPayment extends StatelessWidget {
           },
         ),
       ),
-    );
+    ).animate()
+        .fadeIn(duration: 1500.ms)
+        .slideX(begin: -1, end: 0, duration: 800.ms);
   }
 }

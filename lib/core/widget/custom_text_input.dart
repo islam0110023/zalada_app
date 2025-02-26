@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -15,17 +16,20 @@ class CustomTextInput extends StatelessWidget {
       this.isPass = false,
       required this.controller,
       required this.onTap,
-      this.isEmail = true});
+      this.isEmail = true,
+      this.onPressed,  this.readOnly=false,  this.maxLength=300});
   final String label;
   final String hint;
+  final bool readOnly;
   final bool isEmail;
   final bool isPass;
+  final VoidCallback? onPressed;
   final TextEditingController controller;
   final VoidCallback onTap;
+  final int maxLength;
 
   @override
   Widget build(BuildContext context) {
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -42,7 +46,12 @@ class CustomTextInput extends StatelessWidget {
           height: 8.h,
         ),
         TextFormField(
-          obscureText:isPass,
+          inputFormatters: [
+            LengthLimitingTextInputFormatter(maxLength),
+          ],
+          readOnly: readOnly,
+          onTap: onPressed != null ? onPressed : () {},
+          obscureText: isPass,
           cursorColor: AppColors.hintColor,
           controller: controller,
           style: GoogleFonts.plusJakartaSans(
@@ -57,7 +66,7 @@ class CustomTextInput extends StatelessWidget {
                 borderRadius: BorderRadius.circular(20.r),
                 onTap: onTap,
                 child: isEmail == false
-                    ?isPass == false
+                    ? isPass == false
                         ? Icon(
                             CupertinoIcons.eye,
                             color: AppColors.obscureColor,
