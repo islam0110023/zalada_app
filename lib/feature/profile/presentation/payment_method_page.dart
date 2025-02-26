@@ -102,6 +102,8 @@ class PaymentMethodPage extends StatelessWidget {
           },
         ),
       ),
-    );
+    ).animate()
+        .fadeIn(duration: 1500.ms)
+        .slideX(begin: -1, end: 0, duration: 800.ms);
   }
 }
