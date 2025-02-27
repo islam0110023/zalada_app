@@ -19,6 +19,7 @@ import 'package:zalada_app/feature/search/presentation/search_product_page.dart'
 import 'package:zalada_app/feature/wishlist/logic/wishlist_cubit.dart';
 
 import 'feature/auth/presentation/otp_page.dart';
+import 'feature/cart/presentation/checkout_page.dart';
 import 'feature/home/presentation/home_page.dart';
 
 void main() async {
@@ -72,6 +73,7 @@ class MyApp extends StatelessWidget {
             PaymentMethodPage.id: (context) => PaymentMethodPage(),
             AddNewPayment.id: (context) => AddNewPayment(),
             PrivacyPolicy.id: (context) => PrivacyPolicy(),
+            CheckoutPage.id: (context) => CheckoutPage(),
 
           },
           initialRoute: SplashScreen.id,
