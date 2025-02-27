@@ -6,6 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:zalada_app/core/constants/app_colors.dart';
 import 'package:zalada_app/core/widget/custom_button.dart';
 import 'package:zalada_app/feature/auth/presentation/login_page.dart';
+import 'package:zalada_app/feature/cart/logic/cart_cubit.dart';
 import 'package:zalada_app/feature/home/presentation/home_page.dart';
 
 class CustomBottomCheckout extends StatelessWidget {
@@ -76,7 +77,7 @@ class CustomBottomCheckout extends StatelessWidget {
           CustomButton(
             name: "Back to Home",
             onPressed: () {
-             // context.read<CartCubit>().;
+              context.read<CartCubit>().clearAllCart();
 
               Navigator.pushNamedAndRemoveUntil(
                 context,
