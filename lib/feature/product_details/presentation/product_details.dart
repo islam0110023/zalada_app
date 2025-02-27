@@ -8,8 +8,10 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:zalada_app/core/constants/app_colors.dart';
 import 'package:zalada_app/core/model/favorite_model_db.dart';
 import 'package:zalada_app/core/model/product_model.dart';
+import 'package:zalada_app/core/model/product_model_db.dart';
 import 'package:zalada_app/core/widget/custom_button.dart';
-import 'package:zalada_app/feature/product_details/logic/product_details_cubit.dart';
+import 'package:zalada_app/feature/cart/logic/cart_cubit.dart';
+import 'package:zalada_app/feature/wishlist/logic/wishlist_cubit.dart';
 
 class ProductDetails extends StatelessWidget {
   const ProductDetails({super.key});
@@ -18,40 +20,38 @@ class ProductDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var product = ModalRoute.of(context)!.settings.arguments as Product;
-    return BlocBuilder<ProductDetailsCubit, ProductDetailsState>(
-      builder: (context, state) {
-        var cubit = BlocProvider.of<ProductDetailsCubit>(context);
-        bool isFav = cubit.isFavorite(product.id.toString());
-        return Scaffold(
-          appBar: AppBar(
-            backgroundColor: AppColors.primaryColor,
-            leadingWidth: 90,
-            toolbarHeight: 70,
-            leading: InkWell(
-              borderRadius: BorderRadius.circular(34.r),
-              onTap: () {
-                Navigator.pop(context);
-              },
-              child: Container(
-                  width: 44.r,
-                  height: 44.r,
-                  margin:
-                      EdgeInsets.symmetric(horizontal: 15.r, vertical: 6.r),
-                  padding: EdgeInsets.all(12.r),
-                  decoration: ShapeDecoration(
-                    shape: RoundedRectangleBorder(
-                      side: BorderSide(
-                          width: 1.r, color: AppColors.borderColor),
-                      borderRadius: BorderRadius.circular(34.r),
-                    ),
-                  ),
-                  child: Icon(
-                    Icons.arrow_back,
-                    color: AppColors.obscureColor,
-                  )),
-            ),
-            actions: [
-              InkWell(
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: AppColors.primaryColor,
+        leadingWidth: 90,
+        toolbarHeight: 70,
+        leading: InkWell(
+          borderRadius: BorderRadius.circular(34.r),
+          onTap: () {
+            Navigator.pop(context);
+          },
+          child: Container(
+              width: 44.r,
+              height: 44.r,
+              margin: EdgeInsets.symmetric(horizontal: 15.r, vertical: 6.r),
+              padding: EdgeInsets.all(12.r),
+              decoration: ShapeDecoration(
+                shape: RoundedRectangleBorder(
+                  side: BorderSide(width: 1.r, color: AppColors.borderColor),
+                  borderRadius: BorderRadius.circular(34.r),
+                ),
+              ),
+              child: Icon(
+                Icons.arrow_back,
+                color: AppColors.obscureColor,
+              )),
+        ),
+        actions: [
+          BlocBuilder<WishlistCubit, WishlistState>(
+            builder: (context, state) {
+              var cubit = BlocProvider.of<WishlistCubit>(context);
+              bool isFav = cubit.isFavorite(product.id.toString());
+              return InkWell(
                 onTap: () {
                   FavoriteModelDb favProduct = FavoriteModelDb(
                       id: product.id,
@@ -85,151 +85,174 @@ class ProductDetails extends StatelessWidget {
                             Icons.favorite_outline,
                             color: AppColors.obscureColor,
                           )),
+              );
+            },
+          )
+        ],
+      ),
+      body: SingleChildScrollView(
+        physics: BouncingScrollPhysics(),
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 20.r),
+          child: Column(
+            children: [
+              SizedBox(
+                width: 253.w,
+                child: Text(
+                  product.title!,
+                  textAlign: TextAlign.center,
+                  style: GoogleFonts.plusJakartaSans(
+                    color: AppColors.textColorBlack,
+                    fontSize: 24.sp,
+                    fontWeight: FontWeight.w600,
+                    height: 1.25.h,
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 8.h,
+                width: double.infinity,
+              ),
+              Text(
+                '\$${product.price}',
+                style: GoogleFonts.plusJakartaSans(
+                  color: AppColors.textColorThree,
+                  fontSize: 20.sp,
+                  fontWeight: FontWeight.w700,
+                  height: 1.20.h,
+                ),
+              ),
+              SizedBox(height: 8.h),
+              CachedNetworkImage(
+                imageUrl: product.image!,
+                height: 300.r,
+                width: 300.r,
+                fit: BoxFit.fill,
+                placeholder: (context, url) =>
+                    Center(child: CircularProgressIndicator()),
+                errorWidget: (context, url, error) => Icon(
+                  Icons.error,
+                  color: Colors.red,
+                ),
+              ),
+              SizedBox(
+                height: 12.h,
+              ),
+              FractionallySizedBox(
+                widthFactor: 2,
+                child: Container(
+                  width: double.infinity,
+                  height: 4.h,
+                  margin: EdgeInsets.symmetric(vertical: 24.r),
+                  decoration: BoxDecoration(color: Color(0xFFF0F1F5)),
+                ),
+              ),
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  'Product Description',
+                  style: GoogleFonts.plusJakartaSans(
+                    color: AppColors.textColorBlack,
+                    fontSize: 18.sp,
+                    fontWeight: FontWeight.w600,
+                    height: 1.44.h,
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 12.h,
+              ),
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  textAlign: TextAlign.start,
+                  product.description!,
+                  style: GoogleFonts.plusJakartaSans(
+                    color: AppColors.textColorSecond,
+                    fontSize: 14.sp,
+                    fontWeight: FontWeight.w400,
+                    height: 1.43.h,
+                  ),
+                ),
               )
             ],
           ),
-          body: SingleChildScrollView(
-            physics: BouncingScrollPhysics(),
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20.r),
-              child: Column(
-                children: [
-                  SizedBox(
-                    width: 253.w,
-                    child: Text(
-                      product.title!,
-                      textAlign: TextAlign.center,
-                      style: GoogleFonts.plusJakartaSans(
-                        color: AppColors.textColorBlack,
-                        fontSize: 24.sp,
-                        fontWeight: FontWeight.w600,
-                        height: 1.25.h,
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 8.h,
-                    width: double.infinity,
-                  ),
-                  Text(
-                    '\$${product.price}',
-                    style: GoogleFonts.plusJakartaSans(
-                      color: AppColors.textColorThree,
-                      fontSize: 20.sp,
-                      fontWeight: FontWeight.w700,
-                      height: 1.20.h,
-                    ),
-                  ),
-                  SizedBox(height: 8.h),
-                  CachedNetworkImage(
-                    imageUrl: product.image!,
-                    height: 300.r,
-                    width: 300.r,
-                    fit: BoxFit.fill,
-                    placeholder: (context, url) =>
-                        Center(child: CircularProgressIndicator()),
-                    errorWidget: (context, url, error) => Icon(
-                      Icons.error,
-                      color: Colors.red,
-                    ),
-                  ),
-                  SizedBox(
-                    height: 12.h,
-                  ),
-                  FractionallySizedBox(
-                    widthFactor: 2,
-                    child: Container(
-                      width: double.infinity,
-                      height: 4.h,
-                      margin: EdgeInsets.symmetric(vertical: 24.r),
-                      decoration: BoxDecoration(color: Color(0xFFF0F1F5)),
-                    ),
-                  ),
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      'Product Description',
-                      style: GoogleFonts.plusJakartaSans(
-                        color: AppColors.textColorBlack,
-                        fontSize: 18.sp,
-                        fontWeight: FontWeight.w600,
-                        height: 1.44.h,
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 12.h,
-                  ),
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      textAlign: TextAlign.start,
-                      product.description!,
-                      style: GoogleFonts.plusJakartaSans(
-                        color: AppColors.textColorSecond,
-                        fontSize: 14.sp,
-                        fontWeight: FontWeight.w400,
-                        height: 1.43.h,
-                      ),
-                    ),
-                  )
-                ],
-              ),
+        ),
+      ),
+      bottomNavigationBar: Container(
+        height: 112.h,
+        width: double.infinity,
+        padding: EdgeInsets.symmetric(horizontal: 20.r),
+        decoration: ShapeDecoration(
+          color: AppColors.primaryColor,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(24.r),
+              topRight: Radius.circular(24.r),
             ),
           ),
-          bottomNavigationBar: Container(
-            height: 112.h,
-            width: double.infinity,
-            padding: EdgeInsets.symmetric(horizontal: 20.r),
-            decoration: ShapeDecoration(
-              color: AppColors.primaryColor,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(24.r),
-                  topRight: Radius.circular(24.r),
-                ),
-              ),
-              shadows: [
-                BoxShadow(
-                  color: Color(0x32576F85),
-                  blurRadius: 32,
-                  offset: Offset(0, -1),
-                  spreadRadius: 0,
-                )
-              ],
-            ),
-            child: Row(
-              children: [
-                Container(
-                  width: 56.r,
-                  height: 56.r,
-                  padding: EdgeInsets.all(16.r),
-                  decoration: ShapeDecoration(
-                    shape: RoundedRectangleBorder(
-                      side: BorderSide(
-                          width: 1.r, color: AppColors.borderColor),
-                      borderRadius: BorderRadius.circular(34.r),
+          shadows: [
+            BoxShadow(
+              color: Color(0x32576F85),
+              blurRadius: 32,
+              offset: Offset(0, -1),
+              spreadRadius: 0,
+            )
+          ],
+        ),
+        child: Row(
+          children: [
+            BlocBuilder<CartCubit, CartState>(
+              builder: (context, state) {
+                var cubit = BlocProvider.of<CartCubit>(context);
+                bool isCart = cubit.isCart(product.id.toString());
+                return InkWell(
+                  onTap: () {
+                    CartModelDb cart = CartModelDb(
+                        id: product.id,
+                        title: product.title,
+                        description: product.description,
+                        image: product.image,
+                        quantity: 1,
+                        price: product.price);
+                    cubit.addAndRemoveCart(cart);
+                  },
+                  child: Container(
+                    width: 56.r,
+                    height: 56.r,
+                    padding: EdgeInsets.all(16.r),
+                    decoration: ShapeDecoration(
+                      shape: RoundedRectangleBorder(
+                        side: BorderSide(
+                            width: 1.r, color: AppColors.borderColor),
+                        borderRadius: BorderRadius.circular(34.r),
+                      ),
                     ),
+                    child: isCart
+                        ? Icon(
+                            CupertinoIcons.bag_fill,
+                            color: Colors.red,
+                          )
+                        : Icon(
+                            CupertinoIcons.bag,
+                            color: AppColors.obscureColor,
+                          ),
                   ),
-                  child: Icon(
-                    CupertinoIcons.bag,
-                    color: AppColors.obscureColor,
-                  ),
-                ),
-                SizedBox(
-                  width: 12.w,
-                ),
-                Expanded(
-                  child: CustomButton(
-                    name: "Checkout",
-                    onPressed: () {},
-                  ),
-                )
-              ],
+                );
+              },
             ),
-          ),
-        );
-      },
+            SizedBox(
+              width: 12.w,
+            ),
+            Expanded(
+              child: CustomButton(
+                name: "Checkout",
+                onPressed: () {},
+              ),
+            )
+          ],
+        ),
+      ),
     )
         .animate()
         .fadeIn(duration: 1500.ms)
