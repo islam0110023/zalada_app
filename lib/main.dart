@@ -7,6 +7,7 @@ import 'package:zalada_app/core/network/dio_helper.dart';
 import 'package:zalada_app/feature/auth/presentation/login_page.dart';
 import 'package:zalada_app/feature/auth/presentation/register_page.dart';
 import 'package:zalada_app/feature/cart/logic/cart_cubit.dart';
+import 'package:zalada_app/feature/cart/presentation/payment_check.dart';
 import 'package:zalada_app/feature/home/presentation/notification_page.dart';
 import 'package:zalada_app/feature/onBoarding/presentation/onboarding_page.dart';
 import 'package:zalada_app/feature/onBoarding/presentation/splash_screen.dart';
@@ -20,6 +21,8 @@ import 'package:zalada_app/feature/wishlist/logic/wishlist_cubit.dart';
 
 import 'feature/auth/presentation/otp_page.dart';
 import 'feature/cart/presentation/checkout_page.dart';
+import 'feature/cart/presentation/new_address.dart';
+import 'feature/cart/presentation/select_address_page.dart';
 import 'feature/home/presentation/home_page.dart';
 
 void main() async {
@@ -74,6 +77,9 @@ class MyApp extends StatelessWidget {
             AddNewPayment.id: (context) => AddNewPayment(),
             PrivacyPolicy.id: (context) => PrivacyPolicy(),
             CheckoutPage.id: (context) => CheckoutPage(),
+            SelectAddressPage.id: (context) => SelectAddressPage(),
+            NewAddress.id: (context) => NewAddress(),
+            PaymentCheck.id: (context) => PaymentCheck(),
 
           },
           initialRoute: SplashScreen.id,

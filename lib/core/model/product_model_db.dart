@@ -5,7 +5,7 @@ class CartModelDb extends Product{
   final String title;
   final String description;
   final String image;
-  final int quantity;
+    int quantity;
   final num price;
 
   CartModelDb({
