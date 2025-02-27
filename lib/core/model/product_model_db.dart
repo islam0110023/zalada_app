@@ -6,7 +6,7 @@ class CartModelDb extends Product{
   final String description;
   final String image;
   final int quantity;
-  final double price;
+  final num price;
 
   CartModelDb({
     required this.id,

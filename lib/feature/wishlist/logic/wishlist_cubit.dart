@@ -1,14 +1,17 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
-import 'package:zalada_app/core/db/db_helper/local_db_helper.dart';
-import 'package:zalada_app/core/model/favorite_model_db.dart';
-import 'package:zalada_app/core/model/product_model.dart';
 
-part 'product_details_state.dart';
+import '../../../core/db/db_helper/local_db_helper.dart';
+import '../../../core/model/favorite_model_db.dart';
+import '../../../core/model/product_model.dart';
 
-class ProductDetailsCubit extends Cubit<ProductDetailsState> {
-  ProductDetailsCubit() : super(ProductDetailsInitial());
+part 'wishlist_state.dart';
+
+class WishlistCubit extends Cubit<WishlistState> {
+  WishlistCubit() : super(WishlistInitial());
   List<Product> favorites = [];
+
+
   Future<void> loadFavorites() async {
     emit(FavoriteLoading());
     favorites = await SQLHelper.getFavorites();
@@ -34,4 +37,5 @@ class ProductDetailsCubit extends Cubit<ProductDetailsState> {
   bool isFavorite(String productId) {
     return favorites.any((item) => item.id == productId);
   }
+
 }

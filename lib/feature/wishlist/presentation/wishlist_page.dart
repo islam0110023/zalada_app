@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:zalada_app/core/constants/app_colors.dart';
 import 'package:zalada_app/core/widget/custom_sliver_grid.dart';
-import 'package:zalada_app/feature/product_details/logic/product_details_cubit.dart';
+import 'package:zalada_app/feature/wishlist/logic/wishlist_cubit.dart';
 import 'package:zalada_app/feature/wishlist/presentation/widget/no_favorite.dart';
 
 class WishlistPage extends StatelessWidget {
@@ -37,9 +37,9 @@ class WishlistPage extends StatelessWidget {
             height: 16.h,
           ),
         ),
-        BlocBuilder<ProductDetailsCubit, ProductDetailsState>(
+        BlocBuilder<WishlistCubit, WishlistState>(
           builder: (context, state) {
-            var cubit = context.watch<ProductDetailsCubit>();
+            var cubit = context.watch<WishlistCubit>();
             if (state is FavoriteLoading) {
               return SliverFillRemaining(
                   child: Center(
@@ -49,11 +49,12 @@ class WishlistPage extends StatelessWidget {
               return CustomSliverGrid(
                 products: cubit.favorites,
               );
-            } else if (state is FavoriteNon) {
+            } else if(state is FavoriteNon) {
               return SliverFillRemaining(
                 child: NoFavorite(),
               );
-            } else {
+            }
+            else {
               return SliverFillRemaining(
                 child: Text("error"),
               );
