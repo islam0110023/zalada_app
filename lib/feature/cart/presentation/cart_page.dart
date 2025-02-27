@@ -6,6 +6,7 @@ import 'package:zalada_app/core/constants/app_colors.dart';
 import 'package:zalada_app/core/widget/custom_button.dart';
 import 'package:zalada_app/feature/cart/logic/cart_cubit.dart';
 import 'package:zalada_app/feature/cart/presentation/checkout_page.dart';
+import 'package:zalada_app/feature/cart/presentation/select_address_page.dart';
 import 'package:zalada_app/feature/cart/presentation/widget/no_carts.dart';
 
 import '../../../core/widget/custom_sliver_grid.dart';
@@ -72,7 +73,7 @@ class CartPage extends StatelessWidget {
         child: CustomButton(
           name: "Checkout",
           onPressed: () {
-            Navigator.pushNamed(context, CheckoutPage.id);
+            Navigator.pushNamed(context, SelectAddressPage.id);
           },
         ),
       ),

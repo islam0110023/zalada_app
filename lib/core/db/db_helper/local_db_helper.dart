@@ -56,11 +56,19 @@ class SQLHelper {
     return result.map((e) => CartModelDb.fromMap(e)).toList();
   }
 
+
   static Future<void> removeFromCart(String productId) async {
     final db = await SQLHelper.initDb();
     await db.delete("cart", where: "id = ?", whereArgs: [productId]);
     debugPrint("Product Removed from Cart");
   }
+  static Future<void> clearCart() async {
+    final db = await SQLHelper.initDb();
+    await db.delete('cart');
+    debugPrint("Products Removed from Cart");
+
+  }
+
 
   static Future<int> updateCartItem(CartModelDb product) async {
     final db = await SQLHelper.initDb();
