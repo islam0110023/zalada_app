@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:zalada_app/core/constants/app_colors.dart';
+import 'package:zalada_app/core/constants/app_routes.dart';
 import 'package:zalada_app/core/widget/custom_button.dart';
-import 'package:zalada_app/feature/cart/presentation/checkout_page.dart';
 import 'package:zalada_app/feature/profile/presentation/widget/custom_list_tile_payment.dart';
-import 'package:zalada_app/feature/profile/presentation/widget/custom_payment_bottom.dart';
 
 class PaymentCheck extends StatelessWidget {
   const PaymentCheck({super.key});
-  static const id = "PaymentCheck";
+  static const id = 'PaymentCheck';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,33 +58,33 @@ class PaymentCheck extends StatelessWidget {
             SizedBox(
               height: 16.h,
             ),
-            CustomListTilePayment(
-                image: "assets/images/image 22.png",
-                title: "MasterCard",
-                subTitle: "**** **** 0783 7873"),
+            const CustomListTilePayment(
+                image: 'assets/images/image 22.png',
+                title: 'MasterCard',
+                subTitle: '**** **** 0783 7873'),
             SizedBox(
               height: 16.h,
             ),
-            CustomListTilePayment(
-                image: "assets/images/image 20.png",
-                title: "Paypal",
-                subTitle: "**** **** 0783 7873"),
+            const CustomListTilePayment(
+                image: 'assets/images/image 20.png',
+                title: 'Paypal',
+                subTitle: '**** **** 0783 7873'),
             SizedBox(
               height: 16.h,
             ),
-            CustomListTilePayment(
-                image: "assets/images/image 21.png",
-                title: "Apple Pay",
-                subTitle: "**** **** 0783 7873")
+            const CustomListTilePayment(
+                image: 'assets/images/image 21.png',
+                title: 'Apple Pay',
+                subTitle: '**** **** 0783 7873')
           ],
         ),
       ),
       bottomNavigationBar: Container(
-        margin: EdgeInsets.symmetric(horizontal: 20.r, vertical: 10.r),
+        margin: EdgeInsets.symmetric(horizontal: 20.r, vertical: 20.r),
         child: CustomButton(
-          name: "Continue",
+          name: 'Continue',
           onPressed: () {
-          Navigator.pushNamed(context, CheckoutPage.id);
+          context.push(AppRoutes.checkout);
           },
         ),
       ),

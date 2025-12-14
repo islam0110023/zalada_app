@@ -3,19 +3,18 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:zalada_app/core/model/product_model_db.dart';
 import 'package:zalada_app/core/widget/custom_button.dart';
 import 'package:zalada_app/feature/cart/logic/cart_cubit.dart';
 import 'package:zalada_app/feature/cart/presentation/widget/custom_bottom_checkout.dart';
 import 'package:zalada_app/feature/cart/presentation/widget/custom_list_tile_checkout.dart';
 import 'package:zalada_app/feature/cart/presentation/widget/custom_product_checkout.dart';
 
-import '../../../core/constants/app_colors.dart';
-import '../../profile/presentation/widget/custom_list_tile_payment.dart';
+import 'package:zalada_app/core/constants/app_colors.dart';
+import 'package:zalada_app/feature/profile/presentation/widget/custom_list_tile_payment.dart';
 
 class CheckoutPage extends StatelessWidget {
   const CheckoutPage({super.key});
-  static const id = "CheckoutPage";
+  static const id = 'CheckoutPage';
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +23,7 @@ class CheckoutPage extends StatelessWidget {
         // TODO: implement listener
       },
       builder: (context, state) {
-        var cubit = BlocProvider.of<CartCubit>(context);
+        final cubit = BlocProvider.of<CartCubit>(context);
         return Scaffold(
           backgroundColor: AppColors.primaryColor,
           extendBody: true,
@@ -158,8 +157,7 @@ class CheckoutPage extends StatelessWidget {
                 SliverList.separated(
                   itemCount: cubit.carts.length,
                   itemBuilder: (context, index) {
-                    return CustomProductCheckout(
-                        cart: cubit.carts[index] as CartModelDb);
+                    return CustomProductCheckout(cart: cubit.carts[index]);
                   },
                   separatorBuilder: (context, index) {
                     return SizedBox(
@@ -196,9 +194,10 @@ class CheckoutPage extends StatelessWidget {
                   ),
                 ),
                 CustomListTileCheckout(
-                    title: "Price",
-                    trailing: "${cubit.getTotalPrice().toStringAsFixed(2)}"),
-                CustomListTileCheckout(title: "Delivery Fee", trailing: " 20"),
+                    title: 'Price',
+                    trailing: cubit.getTotalPrice().toStringAsFixed(2)),
+                const CustomListTileCheckout(
+                    title: 'Delivery Fee', trailing: ' 20'),
                 SliverToBoxAdapter(
                   child: Container(
                     width: double.infinity,
@@ -209,9 +208,9 @@ class CheckoutPage extends StatelessWidget {
                   ),
                 ),
                 CustomListTileCheckout(
-                    title: "Total Payment",
+                    title: 'Total Payment',
                     trailing:
-                        " ${cubit.getTotalPrice() == 0 ? 0 : (cubit.getTotalPrice() + 20).toStringAsFixed(2)}"),
+                        ' ${cubit.getTotalPrice() == 0 ? 0 : (cubit.getTotalPrice() + 20).toStringAsFixed(2)}'),
                 SliverToBoxAdapter(
                   child: FractionallySizedBox(
                     widthFactor: 2,
@@ -240,11 +239,11 @@ class CheckoutPage extends StatelessWidget {
                     height: 16.h,
                   ),
                 ),
-                SliverToBoxAdapter(
+                const SliverToBoxAdapter(
                   child: CustomListTilePayment(
-                      image: "assets/images/image 22.png",
-                      title: "MasterCard",
-                      subTitle: "**** **** 0783 7873"),
+                      image: 'assets/images/image 22.png',
+                      title: 'MasterCard',
+                      subTitle: '**** **** 0783 7873'),
                 ),
                 SliverToBoxAdapter(
                     child: SizedBox(
@@ -254,21 +253,22 @@ class CheckoutPage extends StatelessWidget {
             ),
           ),
           bottomNavigationBar: Container(
-            margin: EdgeInsets.symmetric(horizontal: 20.r, vertical: 10.r),
+            margin: EdgeInsets.symmetric(horizontal: 20.r, vertical: 20.r),
             child: CustomButton(
               name:
-                  "Pay   \$${cubit.getTotalPrice() == 0 ? 0 : (cubit.getTotalPrice() + 20).toStringAsFixed(2)}",
+                  'Pay   \$${cubit.getTotalPrice() == 0 ? 0 : (cubit.getTotalPrice() + 20).toStringAsFixed(2)}',
               onPressed: () {
                 showModalBottomSheet(
                   context: context,
+                  isDismissible: false,
                   backgroundColor: Colors.transparent,
                   transitionAnimationController: AnimationController(
                     vsync: Navigator.of(context),
-                    duration: Duration(milliseconds: 999),
-                    reverseDuration: Duration(milliseconds: 999),
+                    duration: const Duration(milliseconds: 999),
+                    reverseDuration: const Duration(milliseconds: 999),
                   ),
                   builder: (context) {
-                    return CustomBottomCheckout();
+                    return const CustomBottomCheckout();
                   },
                 );
               },

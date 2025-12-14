@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:zalada_app/core/constants/app_colors.dart';
+import 'package:zalada_app/core/constants/app_routes.dart';
 import 'package:zalada_app/core/widget/custom_sliver_grid.dart';
 import 'package:zalada_app/feature/home/logic/home_cubit.dart';
-import 'package:zalada_app/feature/search/presentation/search_product_page.dart';
 
 class SearchPage extends StatelessWidget {
   const SearchPage({super.key});
-
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +17,7 @@ class SearchPage extends StatelessWidget {
       slivers: [
         SliverToBoxAdapter(
           child: SizedBox(
-            height: 48.h,
+            height: 50.h,
           ),
         ),
         SliverToBoxAdapter(
@@ -25,8 +25,7 @@ class SearchPage extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: 20.r),
             child: TextFormField(
               onFieldSubmitted: (value) {
-                Navigator.pushNamed(context, SearchProductPage.id,arguments: value);
-
+                context.push(AppRoutes.search, extra: value);
               },
               decoration: InputDecoration(
                 fillColor: AppColors.primaryColor,
@@ -35,7 +34,7 @@ class SearchPage extends StatelessWidget {
                   Icons.search_rounded,
                   color: AppColors.obscureColor,
                 ),
-                hintText: "Search laptop, headset..",
+                hintText: 'Search laptop, headset..',
                 hintStyle: GoogleFonts.plusJakartaSans(
                   color: AppColors.hintColor,
                   fontSize: 16.sp,
@@ -68,13 +67,13 @@ class SearchPage extends StatelessWidget {
         ),
         BlocBuilder<HomeCubit, HomeState>(
           builder: (context, state) {
-            var cubit=BlocProvider.of<HomeCubit>(context);
+            final cubit = BlocProvider.of<HomeCubit>(context);
 
             if (state is HomeProductLoading) {
-              return SliverFillRemaining(
+              return const SliverFillRemaining(
                   child: Center(
-                    child: CircularProgressIndicator(),
-                  ));
+                child: CircularProgressIndicator(),
+              ));
             } else if (state is HomeProductLoaded) {
               return CustomSliverGrid(
                 products: cubit.products,
@@ -84,8 +83,8 @@ class SearchPage extends StatelessWidget {
                 child: Text(state.error),
               );
             } else {
-              return SliverFillRemaining(
-                child: Text("error"),
+              return const SliverFillRemaining(
+                child: Text('error'),
               );
             }
           },

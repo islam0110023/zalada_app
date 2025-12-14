@@ -7,22 +7,22 @@ import 'package:zalada_app/core/widget/custom_button.dart';
 import 'package:zalada_app/core/widget/custom_text_input.dart';
 
 class AddNewPayment extends StatefulWidget {
-  AddNewPayment({super.key});
-  static const id = "AddNewPayment";
+  const AddNewPayment({super.key});
+  static const id = 'AddNewPayment';
 
   @override
   State<AddNewPayment> createState() => _AddNewPaymentState();
 }
 
 class _AddNewPaymentState extends State<AddNewPayment> {
-  TextEditingController controller = TextEditingController(text: "Bryan Adam");
+  TextEditingController controller = TextEditingController(text: 'Bryan Adam');
 
   TextEditingController controller1 =
-      TextEditingController(text: "2727 8907 1278 3726");
+      TextEditingController(text: '2727 8907 1278 3726');
 
-  TextEditingController controller2 = TextEditingController(text: "10/26");
+  TextEditingController controller2 = TextEditingController(text: '10/26');
 
-  TextEditingController controller3 = TextEditingController(text: "778");
+  TextEditingController controller3 = TextEditingController(text: '778');
   @override
   void initState() {
     // TODO: implement initState
@@ -46,7 +46,7 @@ class _AddNewPaymentState extends State<AddNewPayment> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color(0xFF293547),
+        backgroundColor: const Color(0xFF293547),
         leadingWidth: 90,
         toolbarHeight: 70,
         centerTitle: true,
@@ -72,7 +72,7 @@ class _AddNewPaymentState extends State<AddNewPayment> {
               padding: EdgeInsets.all(12.r),
               decoration: ShapeDecoration(
                 shape: RoundedRectangleBorder(
-                  side: BorderSide(width: 1.r, color: Color(0xFF4B5769)),
+                  side: BorderSide(width: 1.r, color: const Color(0xFF4B5769)),
                   borderRadius: BorderRadius.circular(34.r),
                 ),
               ),
@@ -82,7 +82,7 @@ class _AddNewPaymentState extends State<AddNewPayment> {
               )),
         ),
       ),
-      backgroundColor: Color(0xFF293547),
+      backgroundColor: const Color(0xFF293547),
       body: Stack(
         children: [
           Align(
@@ -91,7 +91,7 @@ class _AddNewPaymentState extends State<AddNewPayment> {
               width: double.infinity,
               height: 583.h,
               padding: EdgeInsets.symmetric(horizontal: 20.r),
-              decoration: ShapeDecoration(
+              decoration: const ShapeDecoration(
                 color: Colors.white,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.only(
@@ -106,8 +106,8 @@ class _AddNewPaymentState extends State<AddNewPayment> {
                     height: 130.h,
                   ),
                   CustomTextInput(
-                    label: "Card Name",
-                    hint: "Card Name",
+                    label: 'Card Name',
+                    hint: 'Card Name',
                     controller: controller,
                     onTap: () {},
                   ),
@@ -116,8 +116,8 @@ class _AddNewPaymentState extends State<AddNewPayment> {
                   ),
                   CustomTextInput(
                     maxLength: 16,
-                    label: "Card Number",
-                    hint: "Card Number",
+                    label: 'Card Number',
+                    hint: 'Card Number',
                     controller: controller1,
                     onTap: () {},
                   ),
@@ -134,8 +134,8 @@ class _AddNewPaymentState extends State<AddNewPayment> {
                               controller2.text="${value!.month.toString().padLeft(2,"0")}/${value.year.toString().substring(2)}";
                             },);
                           },
-                          label: "Expiry Date",
-                          hint: "Expiry Date",
+                          label: 'Expiry Date',
+                          hint: 'Expiry Date',
                           controller: controller2,
                           onTap: () {},
                         ),
@@ -146,8 +146,8 @@ class _AddNewPaymentState extends State<AddNewPayment> {
                       Expanded(
                         child: CustomTextInput(
                           maxLength: 3,
-                          label: "CVV",
-                          hint: "CVV",
+                          label: 'CVV',
+                          hint: 'CVV',
                           controller: controller3,
                           onTap: () {},
                         ),
@@ -167,9 +167,9 @@ class _AddNewPaymentState extends State<AddNewPayment> {
               padding: EdgeInsets.all(24.r),
               clipBehavior: Clip.antiAlias,
               decoration: ShapeDecoration(
-                image: DecorationImage(
+                image: const DecorationImage(
                     fit: BoxFit.fill,
-                    image: AssetImage("assets/images/Rectangle.png")),
+                    image: AssetImage('assets/images/Rectangle.png')),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(16.r),
                 ),
@@ -244,7 +244,7 @@ class _AddNewPaymentState extends State<AddNewPayment> {
             left: 154.w,
             top: 210.h,
             child: Text(
-              '${controller2.text}',
+              controller2.text,
               style: GoogleFonts.plusJakartaSans(
                 color: AppColors.primaryColor,
                 fontSize: 14.sp,
@@ -257,7 +257,7 @@ class _AddNewPaymentState extends State<AddNewPayment> {
               right: 44.w,
               top: 195.h,
               child: Image.asset(
-                "assets/images/image 22.png",
+                'assets/images/image 22.png',
                 width: 60.w,
                 height: 40.h,
               ))
@@ -265,9 +265,9 @@ class _AddNewPaymentState extends State<AddNewPayment> {
       ),
       extendBody: true,
       bottomNavigationBar: Container(
-        margin: EdgeInsets.symmetric(horizontal: 20.r, vertical: 10.r),
+        margin: EdgeInsets.symmetric(horizontal: 20.r, vertical: 20.r),
         child: CustomButton(
-          name: "Add Payment",
+          name: 'Add Payment',
           onPressed: () {
             Navigator.pop(context);
           },

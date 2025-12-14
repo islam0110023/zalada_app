@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:zalada_app/core/constants/app_colors.dart';
 import 'package:zalada_app/core/widget/custom_sliver_grid.dart';
@@ -9,15 +10,13 @@ import 'package:zalada_app/feature/home/logic/home_cubit.dart';
 import 'package:zalada_app/feature/search/presentation/widget/custom_filtter_bottom.dart';
 
 class SearchProductPage extends StatelessWidget {
-  SearchProductPage({super.key});
+  const SearchProductPage({super.key});
 
-  static const id = "SearchProductPage";
-  TextEditingController controller = TextEditingController();
+  static const id = 'SearchProductPage';
 
   @override
   Widget build(BuildContext context) {
-    String name = ModalRoute.of(context)!.settings.arguments as String;
-    controller.text = name;
+    final String name = GoRouterState.of(context).extra as String;
     return BlocProvider(
       create: (context) => HomeCubit()..getProducts(),
       child: Scaffold(
@@ -53,7 +52,8 @@ class SearchProductPage extends StatelessWidget {
               title: Padding(
                 padding: EdgeInsets.only(right: 15.r),
                 child: TextFormField(
-                  controller: controller,
+                 // controller: controller,
+                  initialValue: name,
                   decoration: InputDecoration(
                     contentPadding:
                         EdgeInsets.symmetric(horizontal: 16.r, vertical: 10.r),
@@ -63,7 +63,7 @@ class SearchProductPage extends StatelessWidget {
                       Icons.search_rounded,
                       color: AppColors.obscureColor,
                     ),
-                    hintText: "Search laptop, headset..",
+                    hintText: 'Search laptop, headset..',
                     hintStyle: GoogleFonts.plusJakartaSans(
                       color: AppColors.hintColor,
                       fontSize: 16.sp,
@@ -101,7 +101,7 @@ class SearchProductPage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "Result for ”$name”",
+                      'Result for ”$name”',
                       style: GoogleFonts.plusJakartaSans(
                         color: AppColors.textColorSecond,
                         fontSize: 14.sp,
@@ -110,7 +110,7 @@ class SearchProductPage extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      "20 founds",
+                      '20 founds',
                       style: GoogleFonts.plusJakartaSans(
                         color: AppColors.textColorThree,
                         fontSize: 14.sp,
@@ -129,10 +129,10 @@ class SearchProductPage extends StatelessWidget {
             ),
             BlocBuilder<HomeCubit, HomeState>(
               builder: (context, state) {
-                var cubit=BlocProvider.of<HomeCubit>(context);
+                final cubit = BlocProvider.of<HomeCubit>(context);
 
                 if (state is HomeProductLoading) {
-                  return SliverFillRemaining(
+                  return const SliverFillRemaining(
                       child: Center(
                     child: CircularProgressIndicator(),
                   ));
@@ -145,8 +145,8 @@ class SearchProductPage extends StatelessWidget {
                     child: Text(state.error),
                   );
                 } else {
-                  return SliverFillRemaining(
-                    child: Text("error"),
+                  return const SliverFillRemaining(
+                    child: Text('error'),
                   );
                 }
               },
@@ -158,7 +158,7 @@ class SearchProductPage extends StatelessWidget {
           width: double.infinity,
           height: 80,
           alignment: Alignment.topCenter,
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             gradient: LinearGradient(
               begin: Alignment(0.00, 1.00),
               end: Alignment(0, -1),
@@ -172,11 +172,11 @@ class SearchProductPage extends StatelessWidget {
                 backgroundColor: Colors.transparent,
                 transitionAnimationController: AnimationController(
                   vsync: Navigator.of(context),
-                  duration: Duration(milliseconds: 999),
-                  reverseDuration: Duration(milliseconds: 999),
+                  duration: const Duration(milliseconds: 999),
+                  reverseDuration: const Duration(milliseconds: 999),
                 ),
                 builder: (context) {
-                  return CustomFilterBottom()
+                  return const CustomFilterBottom()
                       .animate()
                       .fadeIn(duration: 800.ms)
                       .slideY(begin: 1, end: 0, duration: 600.ms);
@@ -194,9 +194,9 @@ class SearchProductPage extends StatelessWidget {
                 ),
                 shadows: [
                   BoxShadow(
-                    color: Color(0x3D576F85),
+                    color: const Color(0x3D576F85),
                     blurRadius: 24.r,
-                    offset: Offset(0, 12),
+                    offset: const Offset(0, 12),
                     spreadRadius: 0,
                   )
                 ],

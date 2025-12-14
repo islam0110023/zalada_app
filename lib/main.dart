@@ -1,29 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:zalada_app/core/constants/app_routes.dart';
 import 'package:zalada_app/core/db/cache_helper/cache_helper.dart';
 import 'package:zalada_app/core/db/db_helper/local_db_helper.dart';
 import 'package:zalada_app/core/network/dio_helper.dart';
-import 'package:zalada_app/feature/auth/presentation/login_page.dart';
-import 'package:zalada_app/feature/auth/presentation/register_page.dart';
 import 'package:zalada_app/feature/cart/logic/cart_cubit.dart';
-import 'package:zalada_app/feature/cart/presentation/payment_check.dart';
-import 'package:zalada_app/feature/home/presentation/notification_page.dart';
-import 'package:zalada_app/feature/onBoarding/presentation/onboarding_page.dart';
-import 'package:zalada_app/feature/onBoarding/presentation/splash_screen.dart';
-import 'package:zalada_app/feature/product_details/presentation/product_details.dart';
-import 'package:zalada_app/feature/profile/presentation/add_new_payment.dart';
-import 'package:zalada_app/feature/profile/presentation/edit_profile.dart';
-import 'package:zalada_app/feature/profile/presentation/payment_method_page.dart';
-import 'package:zalada_app/feature/profile/presentation/privacy_policy.dart';
-import 'package:zalada_app/feature/search/presentation/search_product_page.dart';
 import 'package:zalada_app/feature/wishlist/logic/wishlist_cubit.dart';
 
-import 'feature/auth/presentation/otp_page.dart';
-import 'feature/cart/presentation/checkout_page.dart';
-import 'feature/cart/presentation/new_address.dart';
-import 'feature/cart/presentation/select_address_page.dart';
-import 'feature/home/presentation/home_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -39,22 +23,18 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-      designSize: Size(375, 812),
+      designSize: const Size(375, 812),
       minTextAdapt: true,
       splitScreenMode: true,
       useInheritedMediaQuery: true,
-
       child: MultiBlocProvider(
         providers: [
-          BlocProvider(
-            create: (context) =>
-          CartCubit()..loadedCart()
-          ),
+          BlocProvider(create: (context) => CartCubit()..loadedCart()),
           BlocProvider(
             create: (context) => WishlistCubit()..loadFavorites(),
           ),
         ],
-        child: MaterialApp(
+        child: MaterialApp.router(
           builder: (context, child) {
             return Container(
               color: Colors.white,
@@ -62,28 +42,13 @@ class MyApp extends StatelessWidget {
             );
           },
           debugShowCheckedModeBanner: false,
-          routes: {
-            SplashScreen.id: (context) => SplashScreen(),
-            OnboardingPage.id: (context) => OnboardingPage(),
-            LoginPage.id: (context) => LoginPage(),
-            RegisterPage.id: (context) => RegisterPage(),
-            OtpPage.id: (context) => OtpPage(),
-            HomePage.id: (context) => HomePage(),
-            SearchProductPage.id: (context) => SearchProductPage(),
-            NotificationPage.id: (context) => NotificationPage(),
-            ProductDetails.id: (context) => ProductDetails(),
-            EditProfile.id: (context) => EditProfile(),
-            PaymentMethodPage.id: (context) => PaymentMethodPage(),
-            AddNewPayment.id: (context) => AddNewPayment(),
-            PrivacyPolicy.id: (context) => PrivacyPolicy(),
-            CheckoutPage.id: (context) => CheckoutPage(),
-            SelectAddressPage.id: (context) => SelectAddressPage(),
-            NewAddress.id: (context) => NewAddress(),
-            PaymentCheck.id: (context) => PaymentCheck(),
-
-          },
-          initialRoute: SplashScreen.id,
-          // home: SplashScreen(),
+          routerConfig: AppRoutes.router,
+          theme: ThemeData(
+              scaffoldBackgroundColor: Colors.white,
+              appBarTheme: const AppBarTheme(
+                  backgroundColor: Colors.white,
+                  elevation: 0,
+                  surfaceTintColor: Colors.white)),
         ),
       ),
     );

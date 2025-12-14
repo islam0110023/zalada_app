@@ -1,9 +1,9 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
 
-import '../../../core/db/db_helper/local_db_helper.dart';
-import '../../../core/model/favorite_model_db.dart';
-import '../../../core/model/product_model.dart';
+import 'package:zalada_app/core/db/db_helper/local_db_helper.dart';
+import 'package:zalada_app/core/model/favorite_model_db.dart';
+import 'package:zalada_app/core/model/product_model.dart';
 
 part 'wishlist_state.dart';
 

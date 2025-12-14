@@ -1,12 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:zalada_app/core/constants/app_colors.dart';
-
-import '../../feature/auth/logic/auth_cubit.dart';
 
 class CustomTextInput extends StatelessWidget {
   const CustomTextInput(
@@ -14,19 +11,23 @@ class CustomTextInput extends StatelessWidget {
       required this.label,
       required this.hint,
       this.isPass = false,
-      required this.controller,
+      this.controller,
       required this.onTap,
       this.isEmail = true,
-      this.onPressed,  this.readOnly=false,  this.maxLength=300});
+      this.onPressed,
+      this.readOnly = false,
+      this.maxLength = 300,
+      this.initialValue});
   final String label;
   final String hint;
   final bool readOnly;
   final bool isEmail;
   final bool isPass;
   final VoidCallback? onPressed;
-  final TextEditingController controller;
+  final TextEditingController? controller;
   final VoidCallback onTap;
   final int maxLength;
+  final String? initialValue;
 
   @override
   Widget build(BuildContext context) {
@@ -50,8 +51,12 @@ class CustomTextInput extends StatelessWidget {
             LengthLimitingTextInputFormatter(maxLength),
           ],
           readOnly: readOnly,
-          onTap: onPressed != null ? onPressed : () {},
+          onTap: onPressed ?? () {},
           obscureText: isPass,
+          initialValue: initialValue,
+          onTapUpOutside: (event) {
+            FocusScope.of(context).unfocus();
+          },
           cursorColor: AppColors.hintColor,
           controller: controller,
           style: GoogleFonts.plusJakartaSans(
@@ -61,7 +66,7 @@ class CustomTextInput extends StatelessWidget {
             height: 1.50.h,
           ),
           decoration: InputDecoration(
-              contentPadding: EdgeInsets.all(16),
+              contentPadding: const EdgeInsets.all(16),
               suffixIcon: InkWell(
                 borderRadius: BorderRadius.circular(20.r),
                 onTap: onTap,
@@ -77,7 +82,7 @@ class CustomTextInput extends StatelessWidget {
                             color: AppColors.obscureColor,
                             size: 24,
                           )
-                    : Text(""),
+                    : const Text(''),
               ),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12.r),

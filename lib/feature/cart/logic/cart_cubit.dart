@@ -1,9 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
 
-import '../../../core/db/db_helper/local_db_helper.dart';
-import '../../../core/model/product_model.dart';
-import '../../../core/model/product_model_db.dart';
+import 'package:zalada_app/core/db/db_helper/local_db_helper.dart';
+import 'package:zalada_app/core/model/product_model_db.dart';
 
 part 'cart_state.dart';
 
@@ -11,7 +10,7 @@ class CartCubit extends Cubit<CartState> {
   CartCubit() : super(CartInitial());
   List<CartModelDb> carts = [];
 
-  loadedCart() {
+  void loadedCart() {
     emit(CartLoading());
     SQLHelper.getCart().then(
       (value) {
@@ -24,6 +23,7 @@ class CartCubit extends Cubit<CartState> {
       },
     );
   }
+
   void clearAllCart() {
     SQLHelper.clearCart().then((_) {
       carts.clear();
@@ -31,7 +31,7 @@ class CartCubit extends Cubit<CartState> {
     });
   }
 
-  addAndRemoveCart(CartModelDb product) {
+  void addAndRemoveCart(CartModelDb product) {
     if (isCart(product.id.toString())) {
       SQLHelper.removeFromCart(product.id.toString()).then(
         (value) {
@@ -48,18 +48,16 @@ class CartCubit extends Cubit<CartState> {
     loadedCart();
   }
 
-  increaseQuantity(String productId) async {
-    final product =
-        carts.firstWhere((item) => item.id == productId) as CartModelDb;
+  void increaseQuantity(String productId) async {
+    final product = carts.firstWhere((item) => item.id == productId);
 
     product.quantity += 1;
     await SQLHelper.updateCartItem(product);
     loadedCart();
   }
 
-  decreaseQuantity(String productId) async {
-    final product =
-        carts.firstWhere((item) => item.id == productId) as CartModelDb;
+  void decreaseQuantity(String productId) async {
+    final product = carts.firstWhere((item) => item.id == productId);
     if (product.quantity > 1) {
       product.quantity -= 1;
       await SQLHelper.updateCartItem(product);
@@ -69,16 +67,14 @@ class CartCubit extends Cubit<CartState> {
       loadedCart();
     }
   }
+
   double getTotalPrice() {
     double total = 0.0;
-    for (var product in carts) {
-      total += (product.price ?? 0) * (product.quantity ?? 1);
+    for (final product in carts) {
+      total += (product.price) * (product.quantity);
     }
     return total;
   }
-
-
-
 
   bool isCart(String productId) {
     return carts.any((item) => item.id == productId);

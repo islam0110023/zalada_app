@@ -41,7 +41,7 @@ class _CustomFilterBottomState extends State<CustomFilterBottom> {
               height: 4.h,
               margin: EdgeInsets.all(10.r),
               decoration: ShapeDecoration(
-                color: Colors.black.withOpacity(0.20000000298023224),
+                color: Colors.black.withAlpha(55),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(11.r),
                 ),
@@ -55,7 +55,7 @@ class _CustomFilterBottomState extends State<CustomFilterBottom> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                "Filter",
+                'Filter',
                 style: GoogleFonts.plusJakartaSans(
                   color: AppColors.textColorBlack,
                   fontSize: 18.sp,
@@ -64,7 +64,7 @@ class _CustomFilterBottomState extends State<CustomFilterBottom> {
                 ),
               ),
               Text(
-                "Reset",
+                'Reset',
                 style: GoogleFonts.plusJakartaSans(
                   color: AppColors.textColorThree,
                   fontSize: 14.sp,
@@ -79,7 +79,7 @@ class _CustomFilterBottomState extends State<CustomFilterBottom> {
             child: Container(
               width: 375,
               margin: EdgeInsets.symmetric(vertical: 24.r),
-              decoration: ShapeDecoration(
+              decoration: const ShapeDecoration(
                 shape: RoundedRectangleBorder(
                   side: BorderSide(
                     width: 1,
@@ -120,7 +120,7 @@ class _CustomFilterBottomState extends State<CustomFilterBottom> {
             tooltip: FlutterSliderTooltip(
               alwaysShowTooltip: true,
               positionOffset: FlutterSliderTooltipPositionOffset(top: 80),
-              textStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
             handler: FlutterSliderHandler(
               child: Icon(
@@ -146,7 +146,7 @@ class _CustomFilterBottomState extends State<CustomFilterBottom> {
             },
           ),
           SizedBox(height: 40.h,),
-          CustomButton(name: "Apply filter", onPressed: () {
+          CustomButton(name: 'Apply filter', onPressed: () {
             Navigator.pop(context);
 
           },)

@@ -7,9 +7,8 @@ import 'package:zalada_app/core/widget/custom_button.dart';
 import 'package:zalada_app/core/widget/custom_text_input.dart';
 
 class NewAddress extends StatelessWidget {
-   NewAddress({super.key});
-  static const id="NewAddress";
-  TextEditingController controller=TextEditingController(text: "Jl. Seturan indah No.9, Kledokan");
+  const NewAddress({super.key});
+  static const id = 'NewAddress';
 
   @override
   Widget build(BuildContext context) {
@@ -51,39 +50,38 @@ class NewAddress extends StatelessWidget {
               )),
         ),
         actions: [
-          GestureDetector(
-            onTap: () {
-             // Navigator.pushNamed(context, NewAddress.id);
-            },
-            child: Container(
-                alignment: Alignment.center,
-                width: 44.r,
-                height: 44.r,
-                margin: EdgeInsets.symmetric(horizontal: 15.r, vertical: 6.r),
-                padding: EdgeInsets.all(10.r),
-                decoration: ShapeDecoration(
-                  shape: RoundedRectangleBorder(
-                    side: BorderSide(width: 1.r, color: AppColors.borderColor),
-                    borderRadius: BorderRadius.circular(34.r),
-                  ),
+          Container(
+              alignment: Alignment.center,
+              width: 44.r,
+              height: 44.r,
+              margin: EdgeInsets.symmetric(horizontal: 15.r, vertical: 6.r),
+              padding: EdgeInsets.all(10.r),
+              decoration: ShapeDecoration(
+                shape: RoundedRectangleBorder(
+                  side: BorderSide(width: 1.r, color: AppColors.borderColor),
+                  borderRadius: BorderRadius.circular(34.r),
                 ),
-                child: Icon(
-                  Icons.search,
-                  color: AppColors.obscureColor,
-                )),
-          )
+              ),
+              child: Icon(
+                Icons.search,
+                color: AppColors.obscureColor,
+              ))
         ],
       ),
       backgroundColor: AppColors.primaryColor,
       extendBody: true,
       body: Padding(
-        padding:  EdgeInsets.symmetric(horizontal: 20.r),
+        padding: EdgeInsets.symmetric(horizontal: 20.r),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: 16.h,),
-            Image.asset("assets/images/Map1.png"),
-            SizedBox(height: 16.h,),
+            SizedBox(
+              height: 16.h,
+            ),
+            Image.asset('assets/images/Map1.png'),
+            SizedBox(
+              height: 16.h,
+            ),
             Text(
               'Select your location from the map',
               style: GoogleFonts.plusJakartaSans(
@@ -93,38 +91,41 @@ class NewAddress extends StatelessWidget {
                 height: 1.44.h,
               ),
             ),
-            SizedBox(height: 16.h,),
+            SizedBox(
+              height: 16.h,
+            ),
             Text(
               'Move the pin on the map to find your location and select the delivery address',
               style: GoogleFonts.plusJakartaSans(
-                color:AppColors.textColorSecond,
+                color: AppColors.textColorSecond,
                 fontSize: 14.sp,
                 fontWeight: FontWeight.w400,
                 height: 1.43.h,
               ),
             ),
-            SizedBox(height: 16.h,),
-            CustomTextInput(label: "Address Detail", hint: "address", controller: controller, onTap: () {
-
-            },)
-
-
+            SizedBox(
+              height: 16.h,
+            ),
+            CustomTextInput(
+              label: 'Address Detail',
+              hint: 'address',
+              initialValue: 'Jl. Seturan indah No.9, Kledokan',
+              onTap: () {},
+            )
           ],
         ),
       ),
       bottomNavigationBar: Container(
-        margin: EdgeInsets.symmetric(horizontal: 20.r, vertical: 10.r),
+        margin: EdgeInsets.symmetric(horizontal: 20.r, vertical: 20.r),
         child: CustomButton(
-          name:"Confirm Address",
+          name: 'Confirm Address',
           onPressed: () {
             Navigator.pop(context);
           },
         ),
       ),
-
-
-
-    )   .animate()
+    )
+        .animate()
         .fadeIn(duration: 1500.ms)
         .slideX(begin: -1, end: 0, duration: 800.ms);
   }

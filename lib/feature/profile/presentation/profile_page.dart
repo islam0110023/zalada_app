@@ -1,24 +1,22 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:zalada_app/core/constants/app_colors.dart';
+import 'package:zalada_app/core/constants/app_routes.dart';
 import 'package:zalada_app/core/db/cache_helper/cache_helper.dart';
-import 'package:zalada_app/feature/auth/presentation/login_page.dart';
-import 'package:zalada_app/feature/profile/presentation/edit_profile.dart';
-import 'package:zalada_app/feature/profile/presentation/payment_method_page.dart';
-import 'package:zalada_app/feature/profile/presentation/privacy_policy.dart';
 import 'package:zalada_app/feature/profile/presentation/widget/custom_list_profile.dart';
 
 class ProfilePage extends StatefulWidget {
-  const  ProfilePage({super.key});
+  const ProfilePage({super.key});
 
   @override
   State<ProfilePage> createState() => _ProfilePageState();
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  bool isActive=false;
+  bool isActive = false;
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +37,7 @@ class _ProfilePageState extends State<ProfilePage> {
         actions: [
           GestureDetector(
             onTap: () {
-              Navigator.pushNamed(context, EditProfile.id);
+              context.push(AppRoutes.editProfile);
             },
             child: Container(
                 alignment: Alignment.center,
@@ -69,7 +67,7 @@ class _ProfilePageState extends State<ProfilePage> {
             ClipRRect(
               borderRadius: BorderRadius.circular(180.r),
               child: Image.network(
-                "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png",
+                'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png',
                 width: 100.r,
                 height: 100.r,
               ),
@@ -125,7 +123,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       width: double.infinity,
                       height: 4,
                       margin: EdgeInsets.symmetric(vertical: 24.r),
-                      decoration: BoxDecoration(color: Color(0xFFF0F1F5)),
+                      decoration: const BoxDecoration(color: Color(0xFFF0F1F5)),
                     ),
                   ),
                   Text(
@@ -141,47 +139,43 @@ class _ProfilePageState extends State<ProfilePage> {
                     height: 16.h,
                   ),
                   CustomListProfile(
-                      name: "Address",
+                      name: 'Address',
                       onTap: () {},
                       icon: Icons.location_on_outlined),
                   SizedBox(
                     height: 16.h,
                   ),
                   CustomListProfile(
-                    name: "Payment Method",
+                    name: 'Payment Method',
                     onTap: () {
-                      Navigator.pushNamed(context, PaymentMethodPage.id);
+                      context.push(AppRoutes.paymentMethod);
                     },
                     icon: Icons.credit_card,
-
                   ),
                   SizedBox(
                     height: 16.h,
                   ),
                   CustomListProfile(
-                      name: "Notification",
-                      onTap: () {},
-                      icon: Icons.notifications_none_rounded,
+                    name: 'Notification',
+                    onTap: () {},
+                    icon: Icons.notifications_none_rounded,
                     widget: Switch(
                       value: isActive,
                       activeColor: Colors.white,
                       inactiveThumbColor: Colors.white,
                       focusColor: Colors.white,
-                      activeTrackColor: Color(0xff34C759),
-
-
+                      activeTrackColor: const Color(0xff34C759),
                       onChanged: (value) {
-                        isActive=value;
-                        setState(() {
-
-                        });
+                        isActive = value;
+                        setState(() {});
                       },
-                    ),),
+                    ),
+                  ),
                   SizedBox(
                     height: 16.h,
                   ),
                   CustomListProfile(
-                      name: "Account Security",
+                      name: 'Account Security',
                       onTap: () {},
                       icon: Icons.verified_user),
                   FractionallySizedBox(
@@ -190,7 +184,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       width: double.infinity,
                       height: 4,
                       margin: EdgeInsets.symmetric(vertical: 24.r),
-                      decoration: BoxDecoration(color: Color(0xFFF0F1F5)),
+                      decoration: const BoxDecoration(color: Color(0xFFF0F1F5)),
                     ),
                   ),
                   Text(
@@ -206,23 +200,23 @@ class _ProfilePageState extends State<ProfilePage> {
                     height: 16.h,
                   ),
                   CustomListProfile(
-                      name: "Invite Friends",
+                      name: 'Invite Friends',
                       onTap: () {},
                       icon: Icons.supervised_user_circle),
                   SizedBox(
                     height: 16.h,
                   ),
                   CustomListProfile(
-                      name: "Privacy Policy",
+                      name: 'Privacy Policy',
                       onTap: () {
-                        Navigator.pushNamed(context, PrivacyPolicy.id);
+                        context.push(AppRoutes.privacyPolicy);
                       },
                       icon: CupertinoIcons.lock),
                   SizedBox(
                     height: 16.h,
                   ),
                   CustomListProfile(
-                      name: "Help Center",
+                      name: 'Help Center',
                       onTap: () {},
                       icon: CupertinoIcons.info_circle),
                   FractionallySizedBox(
@@ -231,17 +225,13 @@ class _ProfilePageState extends State<ProfilePage> {
                       width: double.infinity,
                       height: 4,
                       margin: EdgeInsets.symmetric(vertical: 24.r),
-                      decoration: BoxDecoration(color: Color(0xFFF0F1F5)),
+                      decoration: const BoxDecoration(color: Color(0xFFF0F1F5)),
                     ),
                   ),
                   InkWell(
                     onTap: () {
-                      CacheHelper.removeData(key: "token");
-                      Navigator.pushNamedAndRemoveUntil(
-                        context,
-                        LoginPage.id,
-                        (route) => false,
-                      );
+                      CacheHelper.removeData(key: 'token');
+                      context.go(AppRoutes.login);
                     },
                     child: ListTile(
                       leading: Container(
@@ -249,7 +239,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         height: 44.h,
                         decoration: ShapeDecoration(
                           color: AppColors.containerColorSecond,
-                          shape: OvalBorder(),
+                          shape: const OvalBorder(),
                         ),
                         child: Icon(
                           Icons.logout_rounded,
@@ -257,7 +247,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         ),
                       ),
                       title: Text(
-                        "Logout",
+                        'Logout',
                         style: GoogleFonts.plusJakartaSans(
                           color: AppColors.logoutColor,
                           fontSize: 16.sp,

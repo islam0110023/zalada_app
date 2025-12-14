@@ -4,7 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:zalada_app/core/constants/app_colors.dart';
 import 'package:zalada_app/core/widget/custom_list_view_product.dart';
-import 'package:zalada_app/core/widget/custom_product.dart';
 import 'package:zalada_app/core/widget/custom_sliver_grid.dart';
 import 'package:zalada_app/feature/home/logic/home_cubit.dart';
 import 'package:zalada_app/feature/home/presentation/widget/custom_home_list_tile.dart';
@@ -30,7 +29,7 @@ class _HomeScreenState extends State<HomeScreen>
   @override
   Widget build(BuildContext context) {
     return CustomScrollView(
-      physics: BouncingScrollPhysics(),
+      physics: const BouncingScrollPhysics(),
       slivers: [
         SliverToBoxAdapter(
           child: SizedBox(
@@ -43,7 +42,7 @@ class _HomeScreenState extends State<HomeScreen>
                   child: Container(
                     height: 321.h,
                     width: double.infinity,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       gradient: LinearGradient(
                         colors: [
                           Color(0xFFFD6C8A),
@@ -63,7 +62,7 @@ class _HomeScreenState extends State<HomeScreen>
                     child: ClipRRect(
                         borderRadius: BorderRadius.circular(28.r),
                         child: Image.asset(
-                          "assets/images/Background.png",
+                          'assets/images/Background.png',
                           width: 335.w,
                           height: 178.h,
                         ))),
@@ -71,7 +70,7 @@ class _HomeScreenState extends State<HomeScreen>
                   top: 48.h,
                   child: SizedBox(
                       width: ScreenUtil().screenWidth,
-                      child: CustomHomeListTile()),
+                      child: const CustomHomeListTile()),
                 ),
                 Positioned(
                   top: 116.h,
@@ -79,7 +78,7 @@ class _HomeScreenState extends State<HomeScreen>
                   child: SizedBox(
                     width: ScreenUtil().screenWidth,
                     child: Text(
-                      "Find best device for your setup!",
+                      'Find best device for your setup!',
                       style: GoogleFonts.plusJakartaSans(
                         color: AppColors.primaryColor,
                         fontSize: 32.sp,
@@ -95,7 +94,7 @@ class _HomeScreenState extends State<HomeScreen>
                   child: SizedBox(
                     width: 156.w,
                     child: Text(
-                      "New Bing Wireless Earphone",
+                      'New Bing Wireless Earphone',
                       style: GoogleFonts.plusJakartaSans(
                         color: AppColors.primaryColor,
                         fontSize: 28.sp,
@@ -109,7 +108,7 @@ class _HomeScreenState extends State<HomeScreen>
                   top: 344.h,
                   left: 44.w,
                   child: Text(
-                    "See Offer",
+                    'See Offer',
                     style: GoogleFonts.plusJakartaSans(
                       color: AppColors.primaryColor,
                       fontSize: 16.sp,
@@ -129,7 +128,7 @@ class _HomeScreenState extends State<HomeScreen>
                   top: 235,
                   left: 230,
                   child: Image.asset(
-                    "assets/images/Image (2).png",
+                    'assets/images/Image (2).png',
                     width: 130.9.w,
                     height: 220.32.h,
                     fit: BoxFit.fill,
@@ -151,7 +150,7 @@ class _HomeScreenState extends State<HomeScreen>
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "Hot deals🔥",
+                  'Hot deals🔥',
                   style: GoogleFonts.plusJakartaSans(
                     color: AppColors.textColorBlack,
                     fontSize: 18.sp,
@@ -159,7 +158,7 @@ class _HomeScreenState extends State<HomeScreen>
                     height: 1.44.h,
                   ),
                 ),
-                Container(
+                SizedBox(
                   width: 96.w,
                   height: 24.h,
                   child: Row(
@@ -178,7 +177,7 @@ class _HomeScreenState extends State<HomeScreen>
                           '02',
                           textAlign: TextAlign.center,
                           style: GoogleFonts.plusJakartaSans(
-                            color: Color(0xFF292A2E),
+                            color: const Color(0xFF292A2E),
                             fontSize: 12.sp,
                             fontWeight: FontWeight.w700,
                             height: 1.50.h,
@@ -186,8 +185,8 @@ class _HomeScreenState extends State<HomeScreen>
                         ),
                       ),
                       SizedBox(width: 2.w),
-                      Text(
-                        ":",
+                      const Text(
+                        ':',
                         style: TextStyle(fontSize: 18),
                       ),
                       SizedBox(width: 2.w),
@@ -202,7 +201,7 @@ class _HomeScreenState extends State<HomeScreen>
                           '12',
                           textAlign: TextAlign.center,
                           style: GoogleFonts.plusJakartaSans(
-                            color: Color(0xFF292A2E),
+                            color: const Color(0xFF292A2E),
                             fontSize: 12.sp,
                             fontWeight: FontWeight.w700,
                             height: 1.50.h,
@@ -210,8 +209,8 @@ class _HomeScreenState extends State<HomeScreen>
                         ),
                       ),
                       SizedBox(width: 2.w),
-                      Text(
-                        ":",
+                      const Text(
+                        ':',
                         style: TextStyle(fontSize: 18),
                       ),
                       SizedBox(width: 2.w),
@@ -226,7 +225,7 @@ class _HomeScreenState extends State<HomeScreen>
                           '00',
                           textAlign: TextAlign.center,
                           style: GoogleFonts.plusJakartaSans(
-                            color: Color(0xFF292A2E),
+                            color: const Color(0xFF292A2E),
                             fontSize: 12.sp,
                             fontWeight: FontWeight.w700,
                             height: 1.50.h,
@@ -243,19 +242,19 @@ class _HomeScreenState extends State<HomeScreen>
         BlocBuilder<HomeCubit, HomeState>(
           builder: (context, state) {
             if (state is HomeProductLoading) {
-              return SliverFillRemaining(
+              return const SliverFillRemaining(
                   child: Center(
                 child: CircularProgressIndicator(),
               ));
             } else if (state is HomeProductLoaded) {
-              return CustomListViewProduct();
+              return const CustomListViewProduct();
             } else if (state is HomeProductFailure) {
               return SliverFillRemaining(
                 child: Text(state.error),
               );
             } else {
-              return SliverFillRemaining(
-                child: Text("error"),
+              return const SliverFillRemaining(
+                child: Text('error'),
               );
             }
           },
@@ -269,7 +268,7 @@ class _HomeScreenState extends State<HomeScreen>
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 20.r),
             child: Text(
-              "Categories",
+              'Categories',
               style: GoogleFonts.plusJakartaSans(
                 color: AppColors.textColorBlack,
                 fontSize: 18.sp,
@@ -281,7 +280,7 @@ class _HomeScreenState extends State<HomeScreen>
         ),
         SliverToBoxAdapter(
           child: TabBar(
-            padding: EdgeInsets.symmetric(vertical: 16, horizontal: 20),
+            padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
             isScrollable: true,
             indicatorSize: TabBarIndicatorSize.tab,
             tabAlignment: TabAlignment.center,
@@ -303,10 +302,10 @@ class _HomeScreenState extends State<HomeScreen>
               borderRadius: BorderRadius.circular(999),
               border: Border.all(
                 width: 1,
-                color: Color(0xFFE9EBF0),
+                color: const Color(0xFFE9EBF0),
               ),
               color: AppColors.containerColorOnboarding,
-              boxShadow: [
+              boxShadow: const [
                 BoxShadow(
                   color: Color(0x0F264462),
                   blurRadius: 0,
@@ -343,7 +342,7 @@ class _HomeScreenState extends State<HomeScreen>
                   SizedBox(
                     width: 8.w,
                   ),
-                  Text("All")
+                  const Text('All')
                 ],
               ),
               Row(
@@ -365,7 +364,7 @@ class _HomeScreenState extends State<HomeScreen>
                   SizedBox(
                     width: 8.w,
                   ),
-                  Text("Laptop")
+                  const Text('Laptop')
                 ],
               ),
               Row(
@@ -387,7 +386,7 @@ class _HomeScreenState extends State<HomeScreen>
                   SizedBox(
                     width: 8.w,
                   ),
-                  Text("Accessories")
+                  const Text('Accessories')
                 ],
               ),
             ],
@@ -395,10 +394,10 @@ class _HomeScreenState extends State<HomeScreen>
         ),
         BlocBuilder<HomeCubit, HomeState>(
           builder: (context, state) {
-            var cubit=BlocProvider.of<HomeCubit>(context);
+            final cubit = BlocProvider.of<HomeCubit>(context);
 
             if (state is HomeProductLoading) {
-              return SliverFillRemaining(
+              return const SliverFillRemaining(
                   child: Center(
                 child: CircularProgressIndicator(),
               ));
@@ -411,8 +410,8 @@ class _HomeScreenState extends State<HomeScreen>
                 child: Text(state.error),
               );
             } else {
-              return SliverFillRemaining(
-                child: Text("error"),
+              return const SliverFillRemaining(
+                child: Text('error'),
               );
             }
           },

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:zalada_app/core/constants/app_colors.dart';
 import 'package:zalada_app/core/widget/custom_button.dart';
@@ -10,7 +9,7 @@ import 'package:zalada_app/feature/profile/presentation/widget/custom_payment_bo
 
 class PaymentMethodPage extends StatelessWidget {
   const PaymentMethodPage({super.key});
-  static const id = "PaymentMethodPage";
+  static const id = 'PaymentMethodPage';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,42 +57,42 @@ class PaymentMethodPage extends StatelessWidget {
             SizedBox(
               height: 16.h,
             ),
-            CustomListTilePayment(
-                image: "assets/images/image 22.png",
-                title: "MasterCard",
-                subTitle: "**** **** 0783 7873"),
+            const CustomListTilePayment(
+                image: 'assets/images/image 22.png',
+                title: 'MasterCard',
+                subTitle: '**** **** 0783 7873'),
             SizedBox(
               height: 16.h,
             ),
-            CustomListTilePayment(
-                image: "assets/images/image 20.png",
-                title: "Paypal",
-                subTitle: "**** **** 0783 7873"),
+            const CustomListTilePayment(
+                image: 'assets/images/image 20.png',
+                title: 'Paypal',
+                subTitle: '**** **** 0783 7873'),
             SizedBox(
               height: 16.h,
             ),
-            CustomListTilePayment(
-                image: "assets/images/image 21.png",
-                title: "Apple Pay",
-                subTitle: "**** **** 0783 7873")
+            const CustomListTilePayment(
+                image: 'assets/images/image 21.png',
+                title: 'Apple Pay',
+                subTitle: '**** **** 0783 7873')
           ],
         ),
       ),
       bottomNavigationBar: Container(
-        margin: EdgeInsets.symmetric(horizontal: 20.r, vertical: 10.r),
+        margin: EdgeInsets.symmetric(horizontal: 20.r, vertical: 20.r),
         child: CustomButton(
-          name: "Add New Payment",
+          name: 'Add New Payment',
           onPressed: () {
             showModalBottomSheet(
               context: context,
               backgroundColor: Colors.transparent,
               transitionAnimationController: AnimationController(
                 vsync: Navigator.of(context),
-                duration: Duration(milliseconds: 999),
-                reverseDuration: Duration(milliseconds: 999),
+                duration: const Duration(milliseconds: 999),
+                reverseDuration: const Duration(milliseconds: 999),
               ),
               builder: (context) {
-                return CustomPaymentBottom()
+                return const CustomPaymentBottom()
                     .animate()
                     .fadeIn(duration: 800.ms)
                     .slideY(begin: 1, end: 0, duration: 600.ms);

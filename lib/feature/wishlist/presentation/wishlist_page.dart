@@ -39,9 +39,9 @@ class WishlistPage extends StatelessWidget {
         ),
         BlocBuilder<WishlistCubit, WishlistState>(
           builder: (context, state) {
-            var cubit = context.watch<WishlistCubit>();
+            final cubit = context.watch<WishlistCubit>();
             if (state is FavoriteLoading) {
-              return SliverFillRemaining(
+              return const SliverFillRemaining(
                   child: Center(
                 child: CircularProgressIndicator(),
               ));
@@ -50,13 +50,13 @@ class WishlistPage extends StatelessWidget {
                 products: cubit.favorites,
               );
             } else if(state is FavoriteNon) {
-              return SliverFillRemaining(
+              return const SliverFillRemaining(
                 child: NoFavorite(),
               );
             }
             else {
-              return SliverFillRemaining(
-                child: Text("error"),
+              return const SliverFillRemaining(
+                child: Text('error'),
               );
             }
           },
