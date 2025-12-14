@@ -1,24 +1,22 @@
-import 'dart:math';
-
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:zalada_app/core/constants/app_colors.dart';
+import 'package:zalada_app/core/constants/app_routes.dart';
 import 'package:zalada_app/core/widget/custom_button.dart';
 import 'package:zalada_app/core/widget/custom_text_input.dart';
 import 'package:zalada_app/feature/auth/logic/auth_cubit.dart';
-import 'package:zalada_app/feature/auth/presentation/register_page.dart';
 import 'package:zalada_app/feature/auth/presentation/widget/custom_bottom_sheet.dart';
-import 'package:zalada_app/feature/home/presentation/home_page.dart';
 
 class LoginPage extends StatefulWidget {
-  LoginPage({super.key});
+  const LoginPage({super.key});
 
-  static const id = "LoginPage";
+  static const id = 'LoginPage';
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -42,14 +40,10 @@ class _LoginPageState extends State<LoginPage> {
               if (state is LoginLoaded) {
                 isLoading = false;
                 setState(() {});
-                ScaffoldMessenger.of(context)
-                    .showSnackBar(SnackBar(content: Text("Success Login")));
+                ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('Success Login')));
 
-                Navigator.pushNamedAndRemoveUntil(
-                  context,
-                  HomePage.id,
-                  (route) => false,
-                );
+                context.go(AppRoutes.home);
               }
               if (state is LoginLoading) {
                 isLoading = true;
@@ -63,7 +57,7 @@ class _LoginPageState extends State<LoginPage> {
               }
             },
             builder: (context, state) {
-              var cubit = BlocProvider.of<AuthCubit>(context);
+              final cubit = BlocProvider.of<AuthCubit>(context);
               return ModalProgressHUD(
                 inAsyncCall: isLoading,
                 child: Padding(
@@ -86,8 +80,8 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                             child: AnimatedTextKit(
                               animatedTexts: [
-                                TyperAnimatedText("Login to your\naccount.",
-                                    speed: Duration(milliseconds: 100)),
+                                TyperAnimatedText('Login to your\naccount.',
+                                    speed: const Duration(milliseconds: 100)),
                               ],
                               repeatForever: true,
                             ),
@@ -97,8 +91,8 @@ class _LoginPageState extends State<LoginPage> {
                           height: 32.h,
                         ),
                         CustomTextInput(
-                          label: "Email Address",
-                          hint: "Email address",
+                          label: 'Email Address',
+                          hint: 'Email address',
                           controller: emailController,
                           onTap: () {},
                         ),
@@ -106,8 +100,8 @@ class _LoginPageState extends State<LoginPage> {
                           height: 16.h,
                         ),
                         CustomTextInput(
-                          label: "Password",
-                          hint: "Password",
+                          label: 'Password',
+                          hint: 'Password',
                           controller: passwordController,
                           isPass: cubit.isPass,
                           isEmail: false,
@@ -128,19 +122,21 @@ class _LoginPageState extends State<LoginPage> {
                                 transitionAnimationController:
                                     AnimationController(
                                   vsync: Navigator.of(context),
-                                  duration: Duration(milliseconds: 999),
-                                  reverseDuration: Duration(milliseconds: 999),
+                                  duration: const Duration(milliseconds: 999),
+                                  reverseDuration:
+                                      const Duration(milliseconds: 999),
                                 ),
                                 builder: (context) {
-                                  return CustomBottomSheet()
+                                  return const CustomBottomSheet()
                                       .animate()
                                       .fade(duration: 999.ms)
-                                      .slideY(begin: 1, end: 0, duration: 800.ms);
+                                      .slideY(
+                                          begin: 1, end: 0, duration: 800.ms);
                                 },
                               );
                             },
                             child: Text(
-                              "Forget password?",
+                              'Forget password?',
                               style: GoogleFonts.plusJakartaSans(
                                 color: AppColors.textColorBlack,
                                 fontSize: 16.sp,
@@ -154,7 +150,7 @@ class _LoginPageState extends State<LoginPage> {
                           height: 24.h,
                         ),
                         CustomButton(
-                          name: "Login",
+                          name: 'Login',
                           onPressed: () {
                             cubit.login(
                                 userName: emailController.text,
@@ -176,7 +172,7 @@ class _LoginPageState extends State<LoginPage> {
                               width: 14.w,
                             ),
                             Text(
-                              "or continue with",
+                              'or continue with',
                               style: GoogleFonts.plusJakartaSans(
                                 color: AppColors.textColorSecond,
                                 fontSize: 16.sp,
@@ -202,21 +198,20 @@ class _LoginPageState extends State<LoginPage> {
                           alignment: Alignment.center,
                           child: InkWell(
                             onTap: () {
-                              Navigator.pushReplacementNamed(
-                                  context, RegisterPage.id);
+                              context.replace(AppRoutes.register);
                             },
                             child: Text.rich(TextSpan(children: [
                               TextSpan(
                                 text: "Don't have an account? ",
                                 style: GoogleFonts.plusJakartaSans(
-                                  color: Color(0xFF7C7D81),
+                                  color: const Color(0xFF7C7D81),
                                   fontSize: 16.sp,
                                   fontWeight: FontWeight.w400,
                                   height: 1.50.h,
                                 ),
                               ),
                               TextSpan(
-                                  text: "Register",
+                                  text: 'Register',
                                   style: GoogleFonts.plusJakartaSans(
                                     color: AppColors.textColorThree,
                                     fontSize: 16.sp,

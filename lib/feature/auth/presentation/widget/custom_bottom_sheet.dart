@@ -1,11 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:zalada_app/core/constants/app_colors.dart';
+import 'package:zalada_app/core/constants/app_routes.dart';
 import 'package:zalada_app/core/widget/custom_button.dart';
-import 'package:zalada_app/feature/auth/presentation/otp_page.dart';
 
 class CustomBottomSheet extends StatelessWidget {
   const CustomBottomSheet({super.key});
@@ -31,9 +31,9 @@ class CustomBottomSheet extends StatelessWidget {
             child: Container(
               width: 66.67.w,
               height: 4.h,
-              margin: EdgeInsets.all(10),
+              margin: const EdgeInsets.all(10),
               decoration: ShapeDecoration(
-                color: Colors.black.withOpacity(0.20000000298023224),
+                color: Colors.black.withAlpha(55),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(11.r),
                 ),
@@ -44,7 +44,7 @@ class CustomBottomSheet extends StatelessWidget {
             height: 8.h,
           ),
           Text(
-            "Forget password",
+            'Forget password',
             style: GoogleFonts.plusJakartaSans(
               color: AppColors.textColorBlack,
               fontSize: 24.sp,
@@ -56,7 +56,7 @@ class CustomBottomSheet extends StatelessWidget {
             height: 12.h,
           ),
           Text(
-            "Select which contact details should we use to reset your password",
+            'Select which contact details should we use to reset your password',
             style: GoogleFonts.plusJakartaSans(
               color: AppColors.textColorSecond,
               fontSize: 14.sp,
@@ -101,7 +101,7 @@ class CustomBottomSheet extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Send via Email",
+                        'Send via Email',
                         style: GoogleFonts.plusJakartaSans(
                           color: AppColors.textColorSecond,
                           fontSize: 12.sp,
@@ -113,7 +113,7 @@ class CustomBottomSheet extends StatelessWidget {
                         height: 4.h,
                       ),
                       Text(
-                        "bryan.adam83@gmail.com",
+                        'bryan.adam83@gmail.com',
                         style: GoogleFonts.plusJakartaSans(
                           color: AppColors.textColorBlack,
                           fontSize: 14.sp,
@@ -128,9 +128,11 @@ class CustomBottomSheet extends StatelessWidget {
           SizedBox(
             height: 24.h,
           ),
-          CustomButton(name: "Continue", onPressed: () {
-            Navigator.of(context).pushNamed(OtpPage.id);
-          })
+          CustomButton(
+              name: 'Continue',
+              onPressed: () {
+                context.push(AppRoutes.otp);
+              })
         ],
       ),
     );

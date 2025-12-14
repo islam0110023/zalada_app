@@ -6,7 +6,7 @@ import 'package:zalada_app/core/constants/app_colors.dart';
 
 class NotificationPage extends StatelessWidget {
   const NotificationPage({super.key});
-  static const id = "NotificationPage";
+  static const id = 'NotificationPage';
 
   @override
   Widget build(BuildContext context) {
@@ -84,7 +84,7 @@ class NotificationPage extends StatelessWidget {
                   leading: Container(
                     width: 48.r,
                     height: 48.r,
-                    decoration: ShapeDecoration(
+                    decoration: const ShapeDecoration(
                       color: Color(0xFFF3F6FB),
                       shape: OvalBorder(),
                     ),

@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:zalada_app/core/constants/app_colors.dart';
-import 'package:zalada_app/feature/home/presentation/notification_page.dart';
+import 'package:zalada_app/core/constants/app_routes.dart';
 
 class CustomHomeListTile extends StatelessWidget {
   const CustomHomeListTile({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return  ListTile(
+    return ListTile(
       leading: Container(
         width: 44.r,
         height: 44.r,
         padding: EdgeInsets.all(10.r),
         decoration: ShapeDecoration(
-          color:
-          AppColors.primaryColor.withOpacity(0.20000000298023224),
+          color: AppColors.primaryColor.withAlpha(55),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(34.r),
           ),
@@ -27,17 +27,16 @@ class CustomHomeListTile extends StatelessWidget {
         ),
       ),
       title: Text(
-        "Location",
+        'Location',
         style: GoogleFonts.plusJakartaSans(
-          color:
-          AppColors.primaryColor.withOpacity(0.8999999761581421),
+          color: AppColors.primaryColor.withAlpha(222),
           fontSize: 12.sp,
           fontWeight: FontWeight.w400,
           height: 1.33.h,
         ),
       ),
       subtitle: Text(
-        "Condong Catur",
+        'Condong Catur',
         style: GoogleFonts.plusJakartaSans(
           color: AppColors.primaryColor,
           fontSize: 14.sp,
@@ -50,15 +49,14 @@ class CustomHomeListTile extends StatelessWidget {
         children: [
           InkWell(
             onTap: () {
-              Navigator.pushNamed(context, NotificationPage.id);
+              context.push(AppRoutes.notifications);
             },
             child: Container(
               width: 44.r,
               height: 44.r,
               padding: EdgeInsets.all(10.r),
               decoration: ShapeDecoration(
-                color: AppColors.primaryColor
-                    .withOpacity(0.20000000298023224),
+                color: AppColors.primaryColor.withAlpha(55),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(34.r),
                 ),
@@ -74,19 +72,18 @@ class CustomHomeListTile extends StatelessWidget {
           ),
           ClipRRect(
             borderRadius: BorderRadius.circular(34.r),
-
             child: Container(
                 width: 44.r,
                 height: 44.r,
                 decoration: ShapeDecoration(
-                  color: AppColors.primaryColor
-                      .withOpacity(0.20000000298023224),
+                  color: AppColors.primaryColor.withAlpha(55),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(34.r),
                   ),
                 ),
-                child: Image.network(fit: BoxFit.fill,
-                    "https://i0.hippopx.com/photos/711/14/431/smile-profile-face-male-preview.jpg")),
+                child: Image.network(
+                    fit: BoxFit.fill,
+                    'https://i0.hippopx.com/photos/711/14/431/smile-profile-face-male-preview.jpg')),
           ),
         ],
       ),

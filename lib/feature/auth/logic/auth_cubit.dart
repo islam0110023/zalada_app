@@ -22,7 +22,7 @@ class AuthCubit extends Cubit<AuthState> {
     emit(LoginLoading());
     DioHelper.postData(url: Endpoints.loginEndPoint, data: data).then(
       (value) {
-        if (value.statusCode == 200) {
+        if (value.statusCode == 201) {
           CacheHelper.saveData(key: "token", value: value.data["token"]);
           emit(LoginLoaded());
         } else {
@@ -48,7 +48,7 @@ class AuthCubit extends Cubit<AuthState> {
     emit(RegisterLoading());
     DioHelper.postData(url: Endpoints.signUpEndPoint, data: data).then(
       (value) {
-        if (value.statusCode == 200) {
+        if (value.statusCode == 201) {
           emit(RegisterLoaded());
         } else {
           emit(RegisterFailure(error: "Register Error, try again"));

@@ -10,14 +10,14 @@ import 'package:zalada_app/feature/auth/presentation/widget/custom_bottom_sheet_
 
 class OtpPage extends StatelessWidget {
   const OtpPage({super.key});
-  static const id = "OtpPage";
+  static const id = 'OtpPage';
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "OTP",
+          'OTP',
           style: GoogleFonts.plusJakartaSans(
             color: AppColors.textColorBlack,
             fontSize: 18.sp,
@@ -36,12 +36,12 @@ class OtpPage extends StatelessWidget {
                 height: 44.h,
                 width: double.infinity,
               ),
-              SvgPicture.asset("assets/images/otp_image.svg"),
+              SvgPicture.asset('assets/images/otp_image.svg'),
               SizedBox(
                 height: 24.h,
               ),
               Text(
-                "Verification code",
+                'Verification code',
                 style: GoogleFonts.plusJakartaSans(
                   color: AppColors.textColorBlack,
                   fontSize: 24.sp,
@@ -59,7 +59,7 @@ class OtpPage extends StatelessWidget {
                     TextSpan(children: [
                       TextSpan(
                         text:
-                            "We have sent the code verification to you WhatsApp Number",
+                            'We have sent the code verification to you WhatsApp Number',
                         style: GoogleFonts.plusJakartaSans(
                           color: AppColors.textColorSecond,
                           fontSize: 14.sp,
@@ -68,7 +68,7 @@ class OtpPage extends StatelessWidget {
                         ),
                       ),
                       TextSpan(
-                          text: " +62812 788 6XXXX",
+                          text: ' +62812 788 6XXXX',
                           style: GoogleFonts.plusJakartaSans(
                             color: AppColors.textColorBlack,
                             fontSize: 14.sp,
@@ -107,7 +107,7 @@ class OtpPage extends StatelessWidget {
                 height: 24.h,
               ),
               Text(
-                "Recent code in 32s",
+                'Recent code in 32s',
                 style: GoogleFonts.plusJakartaSans(
                   color: AppColors.textColorBlack,
                   fontSize: 16.sp,
@@ -116,28 +116,32 @@ class OtpPage extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                height: 115.h,
+                height: 90.h,
               ),
               CustomButton(
-                name: "Continue",
+                name: 'Continue',
                 onPressed: () {
                   showModalBottomSheet(
                     context: context,
                     backgroundColor: Colors.transparent,
                     transitionAnimationController: AnimationController(
                       vsync: Navigator.of(context),
-                      duration: Duration(milliseconds: 999),
-                      reverseDuration: Duration(milliseconds: 999),
+                      duration: const Duration(milliseconds: 999),
+                      reverseDuration: const Duration(milliseconds: 999),
                     ),
                     builder: (context) {
-                      return CustomBottomSheetOtp()
+                      return const CustomBottomSheetOtp()
                           .animate()
                           .fade(duration: 999.ms)
                           .slideY(begin: 1, end: 0, duration: 800.ms);
                     },
                   );
                 },
-              )
+              ),
+              SizedBox(
+                height: 24.h,
+              ),
+
             ],
           ),
         ),

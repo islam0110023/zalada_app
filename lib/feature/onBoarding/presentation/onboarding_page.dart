@@ -4,16 +4,17 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:zalada_app/core/constants/app_colors.dart';
+import 'package:zalada_app/core/constants/app_routes.dart';
 import 'package:zalada_app/core/constants/data.dart';
-import 'package:zalada_app/feature/auth/presentation/login_page.dart';
 import 'package:zalada_app/feature/onBoarding/logic/onboarding_cubit.dart';
 
 class OnboardingPage extends StatelessWidget {
   const OnboardingPage({super.key});
 
-  static const id = "OnboardingPage";
+  static const id = 'OnboardingPage';
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +25,7 @@ class OnboardingPage extends StatelessWidget {
           actions: [
             MaterialButton(
               onPressed: () {
-                Navigator.pushNamedAndRemoveUntil(context, LoginPage.id, (route) => false,);
+                context.go(AppRoutes.login);
               },
               splashColor: Colors.transparent,
               child: Text(
@@ -45,7 +46,7 @@ class OnboardingPage extends StatelessWidget {
             // TODO: implement listener
           },
           builder: (context, state) {
-            var cubit = BlocProvider.of<OnboardingCubit>(context);
+            final cubit = BlocProvider.of<OnboardingCubit>(context);
 
             return Column(
               children: [
@@ -53,7 +54,12 @@ class OnboardingPage extends StatelessWidget {
                   height: 55.h,
                   width: double.infinity,
                 ),
-                Flexible(child: SvgPicture.asset(ListData.onboardingList[state].image,width: 299.r,height: 299.r,)),
+                Flexible(
+                    child: SvgPicture.asset(
+                  ListData.onboardingList[state].image,
+                  width: 299.r,
+                  height: 299.r,
+                )),
                 SizedBox(
                   height: 40.h,
                 ),
@@ -110,8 +116,7 @@ class OnboardingPage extends StatelessWidget {
                           child: MaterialButton(
                             onPressed: () {
                               if (state == 2) {
-                                Navigator.pushNamedAndRemoveUntil(
-                                    context, LoginPage.id, (v) => false);
+                               context.go(AppRoutes.login);
                               } else {
                                 cubit.increment();
                               }
@@ -119,7 +124,7 @@ class OnboardingPage extends StatelessWidget {
                             textColor: AppColors.primaryColor,
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(180.r)),
-                            child: Icon(CupertinoIcons.arrow_right),
+                            child: const Icon(CupertinoIcons.arrow_right),
                           ),
                         ),
                       )

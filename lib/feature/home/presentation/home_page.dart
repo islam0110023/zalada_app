@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:zalada_app/core/db/cache_helper/cache_helper.dart';
-import 'package:zalada_app/feature/auth/presentation/login_page.dart';
 import 'package:zalada_app/feature/cart/presentation/cart_page.dart';
 import 'package:zalada_app/feature/home/logic/home_cubit.dart';
 import 'package:zalada_app/feature/home/presentation/home_screen.dart';
@@ -15,7 +13,7 @@ import 'package:zalada_app/feature/wishlist/presentation/wishlist_page.dart';
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
-  static const id = "HomePage";
+  static const id = 'HomePage';
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -25,16 +23,16 @@ class _HomePageState extends State<HomePage> {
   int index = 0;
   int previousIndex = 0;
   List<Widget> pages = [
-    HomeScreen(),
-    SearchPage(),
-    WishlistPage(),
-    CartPage(),
-    ProfilePage()
+    const HomeScreen(),
+    const SearchPage(),
+    const WishlistPage(),
+    const CartPage(),
+    const ProfilePage()
   ];
 
   @override
   Widget build(BuildContext context) {
-    bool isForward = index < previousIndex;
+    final bool isForward = index < previousIndex;
     return BlocProvider(
       create: (context) => HomeCubit()..getProducts(),
       child: Scaffold(
@@ -58,30 +56,30 @@ class _HomePageState extends State<HomePage> {
           backgroundColor: Colors.white,
           showUnselectedLabels: true,
           showSelectedLabels: true,
-          unselectedItemColor: Color(0xFF989E9F),
-          selectedItemColor: Color(0xFF2D3B51),
+          unselectedItemColor: const Color(0xFF989E9F),
+          selectedItemColor: const Color(0xFF2D3B51),
           selectedLabelStyle: GoogleFonts.plusJakartaSans(
-            color: Color(0xFF2D3B51),
+            color: const Color(0xFF2D3B51),
             fontSize: 11,
             fontWeight: FontWeight.w700,
           ),
           type: BottomNavigationBarType.fixed,
           unselectedLabelStyle: GoogleFonts.plusJakartaSans(
-            color: Color(0xFF989E9F),
+            color: const Color(0xFF989E9F),
             fontSize: 11,
             fontWeight: FontWeight.w500,
           ),
-          items: [
+          items: const [
             BottomNavigationBarItem(
-                icon: Icon(CupertinoIcons.house_fill), label: "Home"),
+                icon: Icon(CupertinoIcons.house_fill), label: 'Home'),
             BottomNavigationBarItem(
-                icon: Icon(CupertinoIcons.search), label: "Search"),
+                icon: Icon(CupertinoIcons.search), label: 'Search'),
             BottomNavigationBarItem(
-                icon: Icon(Icons.favorite_border), label: "Wishlist"),
+                icon: Icon(Icons.favorite_border), label: 'Wishlist'),
             BottomNavigationBarItem(
-                icon: Icon(CupertinoIcons.bag), label: "Cart"),
+                icon: Icon(CupertinoIcons.bag), label: 'Cart'),
             BottomNavigationBarItem(
-                icon: Icon(CupertinoIcons.person), label: "Profile"),
+                icon: Icon(CupertinoIcons.person), label: 'Profile'),
           ],
         ),
       ),

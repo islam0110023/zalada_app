@@ -12,7 +12,7 @@ class CustomListViewProduct extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var cubit = BlocProvider.of<HomeCubit>(context);
+    final cubit = BlocProvider.of<HomeCubit>(context);
 
     return SliverToBoxAdapter(
       child: Padding(
@@ -33,8 +33,8 @@ class CustomListViewProduct extends StatelessWidget {
               enableInfiniteScroll: true,
               reverse: false,
               autoPlay: true,
-              autoPlayInterval: Duration(seconds: 3),
-              autoPlayAnimationDuration: Duration(milliseconds: 800),
+              autoPlayInterval: const Duration(seconds: 3),
+              autoPlayAnimationDuration: const Duration(milliseconds: 800),
               autoPlayCurve: Curves.fastOutSlowIn,
               enlargeFactor: 0.3,
               scrollDirection: Axis.horizontal,

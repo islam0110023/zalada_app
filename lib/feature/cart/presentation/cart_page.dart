@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:zalada_app/core/constants/app_colors.dart';
+import 'package:zalada_app/core/constants/app_routes.dart';
 import 'package:zalada_app/core/widget/custom_button.dart';
 import 'package:zalada_app/feature/cart/logic/cart_cubit.dart';
-import 'package:zalada_app/feature/cart/presentation/checkout_page.dart';
-import 'package:zalada_app/feature/cart/presentation/select_address_page.dart';
 import 'package:zalada_app/feature/cart/presentation/widget/no_carts.dart';
 
-import '../../../core/widget/custom_sliver_grid.dart';
+import 'package:zalada_app/core/widget/custom_sliver_grid.dart';
 
 class CartPage extends StatelessWidget {
   const CartPage({super.key});
@@ -21,8 +21,8 @@ class CartPage extends StatelessWidget {
         slivers: [
           SliverToBoxAdapter(
               child: SizedBox(
-                height: 56.h,
-              )),
+            height: 56.h,
+          )),
           SliverToBoxAdapter(
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 20.r),
@@ -44,23 +44,23 @@ class CartPage extends StatelessWidget {
           ),
           BlocBuilder<CartCubit, CartState>(
             builder: (context, state) {
-              var cubit = context.watch<CartCubit>();
+              final cubit = context.watch<CartCubit>();
               if (state is CartLoading) {
-                return SliverFillRemaining(
+                return const SliverFillRemaining(
                     child: Center(
-                      child: CircularProgressIndicator(),
-                    ));
+                  child: CircularProgressIndicator(),
+                ));
               } else if (state is CartLoaded) {
                 return CustomSliverGrid(
                   products: cubit.carts,
                 );
               } else if (state is CartNon) {
-                return SliverFillRemaining(
+                return const SliverFillRemaining(
                   child: NoCarts(),
                 );
               } else {
-                return SliverFillRemaining(
-                  child: Text("error"),
+                return const SliverFillRemaining(
+                  child: Text('error'),
                 );
               }
             },
@@ -71,9 +71,9 @@ class CartPage extends StatelessWidget {
       bottomNavigationBar: Container(
         margin: EdgeInsets.symmetric(horizontal: 20.r, vertical: 10.r),
         child: CustomButton(
-          name: "Checkout",
+          name: 'Checkout',
           onPressed: () {
-            Navigator.pushNamed(context, SelectAddressPage.id);
+            context.push(AppRoutes.selectAddress);
           },
         ),
       ),

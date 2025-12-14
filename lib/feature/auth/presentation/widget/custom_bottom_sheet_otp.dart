@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:zalada_app/core/constants/app_colors.dart';
+import 'package:zalada_app/core/constants/app_routes.dart';
 import 'package:zalada_app/core/widget/custom_button.dart';
-import 'package:zalada_app/feature/auth/presentation/login_page.dart';
-import 'package:zalada_app/feature/home/presentation/home_page.dart';
 
 class CustomBottomSheetOtp extends StatelessWidget {
   const CustomBottomSheetOtp({super.key});
@@ -15,7 +15,7 @@ class CustomBottomSheetOtp extends StatelessWidget {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 20.r),
       width: double.infinity,
-      height: 517.h,
+      // height: 600.h,
       decoration: ShapeDecoration(
         color: Colors.white,
         shape: RoundedRectangleBorder(
@@ -32,9 +32,9 @@ class CustomBottomSheetOtp extends StatelessWidget {
             child: Container(
               width: 66.67.w,
               height: 4.h,
-              margin: EdgeInsets.all(10),
+              margin: const EdgeInsets.all(10),
               decoration: ShapeDecoration(
-                color: Colors.black.withOpacity(0.20000000298023224),
+                color: Colors.black.withAlpha(55),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(11.r),
                 ),
@@ -45,12 +45,15 @@ class CustomBottomSheetOtp extends StatelessWidget {
             height: 24.h,
             width: double.infinity,
           ),
-          SvgPicture.asset("assets/images/cong_image.svg"),
+          SvgPicture.asset(
+            'assets/images/cong_image.svg',
+            height: 200,
+          ),
           SizedBox(
             height: 24.h,
           ),
           Text(
-            "Congratulations!",
+            'Congratulations!',
             style: GoogleFonts.plusJakartaSans(
                 fontSize: 24.sp,
                 fontWeight: FontWeight.w600,
@@ -61,7 +64,7 @@ class CustomBottomSheetOtp extends StatelessWidget {
             height: 12.h,
           ),
           Text(
-            "Your account is ready to use. You will be redirected to the Homepage in a few seconds.",
+            'Your account is ready to use. You will be redirected to the Homepage in a few seconds.',
             textAlign: TextAlign.center,
             style: GoogleFonts.plusJakartaSans(
                 fontSize: 14.sp,
@@ -70,18 +73,14 @@ class CustomBottomSheetOtp extends StatelessWidget {
                 height: 1.20.h),
           ),
           SizedBox(
-            height: 24.h,
+            height: 18.h,
           ),
           CustomButton(
-            name: "Continue",
+            name: 'Continue',
             onPressed: () {
-              Navigator.pushNamedAndRemoveUntil(
-                context,
-                LoginPage.id,
-                (route) => false,
-              );
+              context.go(AppRoutes.login);
             },
-          )
+          ),
         ],
       ),
     );

@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:zalada_app/core/constants/app_colors.dart';
-import 'package:zalada_app/feature/cart/presentation/new_address.dart';
-import 'package:zalada_app/feature/cart/presentation/payment_check.dart';
+import 'package:zalada_app/core/constants/app_routes.dart';
 
-import '../../../core/widget/custom_button.dart';
+import 'package:zalada_app/core/widget/custom_button.dart';
 
 class SelectAddressPage extends StatelessWidget {
   const SelectAddressPage({super.key});
-  static const id = "SelectAddressPage";
+  static const id = 'SelectAddressPage';
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +54,7 @@ class SelectAddressPage extends StatelessWidget {
         actions: [
           GestureDetector(
             onTap: () {
-               Navigator.pushNamed(context, NewAddress.id);
+              context.push(AppRoutes.newAddress);
             },
             child: Container(
                 alignment: Alignment.center,
@@ -102,14 +102,14 @@ class SelectAddressPage extends StatelessWidget {
                     leading: Container(
                       width: 32.r,
                       height: 32.r,
-                      padding:  EdgeInsets.all(4.r),
+                      padding: EdgeInsets.all(4.r),
                       decoration: ShapeDecoration(
                         color: AppColors.containerColorBack,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(40.r),
                         ),
                       ),
-                      child: Text(
+                      child: const Text(
                         '🏡',
                         textAlign: TextAlign.center,
                         style: TextStyle(
@@ -131,9 +131,10 @@ class SelectAddressPage extends StatelessWidget {
                     ),
                     trailing: Container(
                       height: 21.h,
-                      padding:  EdgeInsets.symmetric(horizontal: 8.r, vertical: 4.r),
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 8.r, vertical: 4.r),
                       decoration: ShapeDecoration(
-                        color: Color(0xFF20AD20),
+                        color: const Color(0xFF20AD20),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(30.r),
                         ),
@@ -157,7 +158,7 @@ class SelectAddressPage extends StatelessWidget {
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                         style: GoogleFonts.plusJakartaSans(
-                          color:AppColors.textColorBlack,
+                          color: AppColors.textColorBlack,
                           fontSize: 14.sp,
                           fontWeight: FontWeight.w600,
                           height: 1.43.h,
@@ -172,10 +173,9 @@ class SelectAddressPage extends StatelessWidget {
                           height: 1.43.h,
                         ),
                       ),
-                      trailing: Image.asset("assets/images/Map.png"),
+                      trailing: Image.asset('assets/images/Map.png'),
                     ),
                   )
-
                 ],
               ),
             ),
@@ -201,14 +201,14 @@ class SelectAddressPage extends StatelessWidget {
                     leading: Container(
                       width: 32.r,
                       height: 32.r,
-                      padding:  EdgeInsets.all(4.r),
+                      padding: EdgeInsets.all(4.r),
                       decoration: ShapeDecoration(
                         color: AppColors.containerColorBack,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(40.r),
                         ),
                       ),
-                      child: Text(
+                      child: const Text(
                         '🏢',
                         textAlign: TextAlign.center,
                         style: TextStyle(
@@ -238,7 +238,7 @@ class SelectAddressPage extends StatelessWidget {
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                         style: GoogleFonts.plusJakartaSans(
-                          color:AppColors.textColorBlack,
+                          color: AppColors.textColorBlack,
                           fontSize: 14.sp,
                           fontWeight: FontWeight.w600,
                           height: 1.43.h,
@@ -253,10 +253,9 @@ class SelectAddressPage extends StatelessWidget {
                           height: 1.43.h,
                         ),
                       ),
-                      trailing: Image.asset("assets/images/Map.png"),
+                      trailing: Image.asset('assets/images/Map.png'),
                     ),
                   )
-
                 ],
               ),
             ),
@@ -282,14 +281,14 @@ class SelectAddressPage extends StatelessWidget {
                     leading: Container(
                       width: 32.r,
                       height: 32.r,
-                      padding:  EdgeInsets.all(4.r),
+                      padding: EdgeInsets.all(4.r),
                       decoration: ShapeDecoration(
                         color: AppColors.containerColorBack,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(40.r),
                         ),
                       ),
-                      child: Text(
+                      child: const Text(
                         '🏘️',
                         textAlign: TextAlign.center,
                         style: TextStyle(
@@ -319,7 +318,7 @@ class SelectAddressPage extends StatelessWidget {
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                         style: GoogleFonts.plusJakartaSans(
-                          color:AppColors.textColorBlack,
+                          color: AppColors.textColorBlack,
                           fontSize: 14.sp,
                           fontWeight: FontWeight.w600,
                           height: 1.43.h,
@@ -334,10 +333,9 @@ class SelectAddressPage extends StatelessWidget {
                           height: 1.43.h,
                         ),
                       ),
-                      trailing: Image.asset("assets/images/Map.png"),
+                      trailing: Image.asset('assets/images/Map.png'),
                     ),
                   )
-
                 ],
               ),
             )
@@ -345,16 +343,16 @@ class SelectAddressPage extends StatelessWidget {
         ),
       ),
       bottomNavigationBar: Container(
-        margin: EdgeInsets.symmetric(horizontal: 20.r, vertical: 10.r),
+        margin: EdgeInsets.symmetric(horizontal: 20.r, vertical: 20.r),
         child: CustomButton(
-          name:"Select Address",
+          name: 'Select Address',
           onPressed: () {
-            Navigator.pushNamed(context, PaymentCheck.id);
+            context.push(AppRoutes.paymentCheck);
           },
         ),
       ),
-
-    )   .animate()
+    )
+        .animate()
         .fadeIn(duration: 1500.ms)
         .slideX(begin: -1, end: 0, duration: 800.ms);
   }

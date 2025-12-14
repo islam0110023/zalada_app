@@ -3,18 +3,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:zalada_app/core/constants/app_colors.dart';
+import 'package:zalada_app/core/constants/app_routes.dart';
 import 'package:zalada_app/core/widget/custom_button.dart';
 import 'package:zalada_app/core/widget/custom_text_input.dart';
 import 'package:zalada_app/feature/auth/logic/auth_cubit.dart';
-import 'package:zalada_app/feature/auth/presentation/login_page.dart';
 
 class RegisterPage extends StatefulWidget {
-  RegisterPage({super.key});
+  const RegisterPage({super.key});
 
-  static const id = "RegisterPage";
+  static const id = 'RegisterPage';
 
   @override
   State<RegisterPage> createState() => _RegisterPageState();
@@ -46,13 +47,9 @@ class _RegisterPageState extends State<RegisterPage> {
                       isLoading = false;
                       setState(() {});
                       ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text("Success Register")));
-            
-                      Navigator.pushNamedAndRemoveUntil(
-                        context,
-                        LoginPage.id,
-                        (route) => false,
-                      );
+                          const SnackBar(content: Text('Success Register')));
+
+                      context.go(AppRoutes.login);
                     }
                     if (state is RegisterLoading) {
                       isLoading = true;
@@ -66,7 +63,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     }
                   },
                   builder: (context, state) {
-                    var cubit = BlocProvider.of<AuthCubit>(context);
+                    final cubit = BlocProvider.of<AuthCubit>(context);
                     return Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -84,8 +81,8 @@ class _RegisterPageState extends State<RegisterPage> {
                             ),
                             child: AnimatedTextKit(
                               animatedTexts: [
-                                TyperAnimatedText("Create your new\naccount",
-                                    speed: Duration(milliseconds: 100)),
+                                TyperAnimatedText('Create your new\naccount',
+                                    speed: const Duration(milliseconds: 100)),
                               ],
                               repeatForever: true,
                             ),
@@ -95,8 +92,8 @@ class _RegisterPageState extends State<RegisterPage> {
                           height: 32.h,
                         ),
                         CustomTextInput(
-                          label: "User Name",
-                          hint: "User Name",
+                          label: 'User Name',
+                          hint: 'User Name',
                           controller: userNameController,
                           onTap: () {},
                         ),
@@ -104,8 +101,8 @@ class _RegisterPageState extends State<RegisterPage> {
                           height: 16.h,
                         ),
                         CustomTextInput(
-                          label: "Password",
-                          hint: "Password",
+                          label: 'Password',
+                          hint: 'Password',
                           controller: passwordController,
                           isPass: cubit.isPass,
                           isEmail: false,
@@ -117,8 +114,8 @@ class _RegisterPageState extends State<RegisterPage> {
                           height: 16.h,
                         ),
                         CustomTextInput(
-                          label: "Email",
-                          hint: "Email",
+                          label: 'Email',
+                          hint: 'Email',
                           controller: emailController,
                           isPass: false,
                           isEmail: true,
@@ -128,7 +125,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           height: 24.h,
                         ),
                         CustomButton(
-                          name: "Register",
+                          name: 'Register',
                           onPressed: () {
                             cubit.register(
                                 userName: userNameController.text,
@@ -151,7 +148,7 @@ class _RegisterPageState extends State<RegisterPage> {
                               width: 14.w,
                             ),
                             Text(
-                              "or continue with",
+                              'or continue with',
                               style: GoogleFonts.plusJakartaSans(
                                 color: AppColors.textColorSecond,
                                 fontSize: 16.sp,
@@ -177,21 +174,20 @@ class _RegisterPageState extends State<RegisterPage> {
                           alignment: Alignment.center,
                           child: InkWell(
                             onTap: () {
-                              Navigator.pushReplacementNamed(
-                                  context, LoginPage.id);
+                              context.replace(AppRoutes.login);
                             },
                             child: Text.rich(TextSpan(children: [
                               TextSpan(
-                                text: "Already have an account? ",
+                                text: 'Already have an account? ',
                                 style: GoogleFonts.plusJakartaSans(
-                                  color: Color(0xFF7C7D81),
+                                  color: const Color(0xFF7C7D81),
                                   fontSize: 16.sp,
                                   fontWeight: FontWeight.w400,
                                   height: 1.50.h,
                                 ),
                               ),
                               TextSpan(
-                                  text: "Login",
+                                  text: 'Login',
                                   style: GoogleFonts.plusJakartaSans(
                                     color: AppColors.textColorThree,
                                     fontSize: 16.sp,

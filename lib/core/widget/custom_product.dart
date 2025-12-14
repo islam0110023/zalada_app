@@ -1,10 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:zalada_app/core/constants/app_colors.dart';
+import 'package:zalada_app/core/constants/app_routes.dart';
 import 'package:zalada_app/core/model/product_model.dart';
-import 'package:zalada_app/feature/product_details/presentation/product_details.dart';
 
 class CustomProduct extends StatelessWidget {
   const CustomProduct({super.key, required this.productModel});
@@ -14,7 +15,7 @@ class CustomProduct extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.pushNamed(context, ProductDetails.id,arguments: productModel);
+        context.push(AppRoutes.productDetails, extra: productModel);
       },
       child: SizedBox(
         width: 159.w,
@@ -40,9 +41,9 @@ class CustomProduct extends StatelessWidget {
                   ),
                   shadows: [
                     BoxShadow(
-                      color: Color(0x35566E84),
+                      color: const Color(0x35566E84),
                       blurRadius: 10.r,
-                      offset: Offset(0, 10),
+                      offset: const Offset(0, 10),
                       spreadRadius: -8,
                     )
                   ],
@@ -85,7 +86,7 @@ class CustomProduct extends StatelessWidget {
                 height: 60.h,
                 decoration: BoxDecoration(boxShadow: [
                   BoxShadow(
-                    color: AppColors.textColorBlack.withOpacity(.3),
+                    color: AppColors.textColorBlack.withAlpha(77),
                     spreadRadius: -5,
                     blurRadius: 35.r,
                   )
@@ -93,16 +94,19 @@ class CustomProduct extends StatelessWidget {
               ),
             ),
             Positioned(
-             // bottom: 130.h,
+                // bottom: 130.h,
                 left: 18.5.w,
                 child: CachedNetworkImage(
-                  imageUrl: productModel.image!,
+                  imageUrl: productModel.image,
                   height: 130.h,
                   width: 120.w,
                   fit: BoxFit.fill,
                   placeholder: (context, url) =>
-                      Center(child: CircularProgressIndicator()),
-                  errorWidget: (context, url, error) => Icon(Icons.error,color: Colors.red,),
+                      const Center(child: CircularProgressIndicator()),
+                  errorWidget: (context, url, error) => const Icon(
+                    Icons.error,
+                    color: Colors.red,
+                  ),
                 ))
           ],
         ),

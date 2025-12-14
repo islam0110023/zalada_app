@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:zalada_app/core/model/product_model.dart';
 import 'package:zalada_app/core/widget/custom_product.dart';
-import 'package:zalada_app/feature/home/logic/home_cubit.dart';
 
 class CustomSliverGrid extends StatelessWidget {
   const CustomSliverGrid({super.key, required this.products});
