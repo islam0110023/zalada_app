@@ -86,7 +86,7 @@ class CustomProduct extends StatelessWidget {
                 height: 60.h,
                 decoration: BoxDecoration(boxShadow: [
                   BoxShadow(
-                    color: AppColors.textColorBlack.withAlpha(77),
+                    color: AppColors.textColorBlack.withAlpha(120),
                     spreadRadius: -5,
                     blurRadius: 35.r,
                   )

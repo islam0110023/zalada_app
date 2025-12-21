@@ -175,7 +175,11 @@ class ProductDetails extends StatelessWidget {
                     height: 1.43.h,
                   ),
                 ),
-              )
+              ),
+              SizedBox(
+                height: 12.h,
+              ),
+
             ],
           ),
         ),

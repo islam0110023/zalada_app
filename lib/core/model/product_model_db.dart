@@ -1,23 +1,6 @@
 import 'package:zalada_app/core/model/product_model.dart';
 
 class CartModelDb extends Product{
-  final String id;
-  final String title;
-  final String description;
-  final String image;
-    int quantity;
-  final num price;
-
-  CartModelDb({
-    required this.id,
-    required this.title,
-    required
-    this.description,
-    required
-    this.image,
-    required this.quantity,
-    required this.price,
-  });
 
   factory CartModelDb.fromMap(Map<String, dynamic> map) {
     return CartModelDb(
@@ -29,6 +12,28 @@ class CartModelDb extends Product{
       price: map['price'],
     );
   }
+
+  CartModelDb({
+    required this.id,
+    required this.title,
+    required
+    this.description,
+    required
+    this.image,
+    required this.quantity,
+    required this.price,
+  });
+  @override
+  final String id;
+  @override
+  final String title;
+  @override
+  final String description;
+  @override
+  final String image;
+    int quantity;
+  @override
+  final num price;
 
   Map<String, dynamic> toMap() {
     return {

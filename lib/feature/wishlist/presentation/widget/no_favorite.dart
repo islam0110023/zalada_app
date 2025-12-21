@@ -12,7 +12,7 @@ class NoFavorite extends StatelessWidget {
     return Column(
       children: [
         SizedBox(height: 44.h,),
-        SvgPicture.asset("assets/images/cart_image.svg",width: 201.r,height: 201.r,),
+        SvgPicture.asset('assets/images/cart_image.svg',width: 201.r,height: 201.r,),
         SizedBox(height: 24.h,),
         Text(
           'Your wishlist is an empty!',

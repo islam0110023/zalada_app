@@ -40,71 +40,71 @@ class AppRoutes {
     routes: [
       GoRoute(
         path: splash,
-        builder: (context, state) => SplashScreen(),
+        builder: (context, state) => const SplashScreen(),
       ),
       GoRoute(
         path: onboarding,
-        builder: (context, state) => OnboardingPage(),
+        builder: (context, state) => const OnboardingPage(),
       ),
       GoRoute(
         path: login,
-        builder: (context, state) => LoginPage(),
+        builder: (context, state) => const LoginPage(),
       ),
       GoRoute(
         path: register,
-        builder: (context, state) => RegisterPage(),
+        builder: (context, state) => const RegisterPage(),
       ),
       GoRoute(
         path: otp,
-        builder: (context, state) => OtpPage(),
+        builder: (context, state) => const OtpPage(),
       ),
       GoRoute(
         path: home,
-        builder: (context, state) => HomePage(),
+        builder: (context, state) => const HomePage(),
       ),
       GoRoute(
         path: search,
-        builder: (context, state) => SearchProductPage(),
+        builder: (context, state) => const SearchProductPage(),
       ),
       GoRoute(
         path: notifications,
-        builder: (context, state) => NotificationPage(),
+        builder: (context, state) => const NotificationPage(),
       ),
       GoRoute(
         path: productDetails,
-        builder: (context, state) => ProductDetails(),
+        builder: (context, state) => const ProductDetails(),
       ),
       GoRoute(
         path: editProfile,
-        builder: (context, state) => EditProfile(),
+        builder: (context, state) => const EditProfile(),
       ),
       GoRoute(
         path: paymentMethod,
-        builder: (context, state) => PaymentMethodPage(),
+        builder: (context, state) => const PaymentMethodPage(),
       ),
       GoRoute(
         path: addPayment,
-        builder: (context, state) => AddNewPayment(),
+        builder: (context, state) => const AddNewPayment(),
       ),
       GoRoute(
         path: privacyPolicy,
-        builder: (context, state) => PrivacyPolicy(),
+        builder: (context, state) => const PrivacyPolicy(),
       ),
       GoRoute(
         path: checkout,
-        builder: (context, state) => CheckoutPage(),
+        builder: (context, state) => const CheckoutPage(),
       ),
       GoRoute(
         path: selectAddress,
-        builder: (context, state) => SelectAddressPage(),
+        builder: (context, state) => const SelectAddressPage(),
       ),
       GoRoute(
         path: newAddress,
-        builder: (context, state) => NewAddress(),
+        builder: (context, state) => const NewAddress(),
       ),
       GoRoute(
         path: paymentCheck,
-        builder: (context, state) => PaymentCheck(),
+        builder: (context, state) => const PaymentCheck(),
       ),
     ],
   );

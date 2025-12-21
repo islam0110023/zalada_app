@@ -151,7 +151,7 @@ class _EditProfileState extends State<EditProfile> {
         ),
       ),
       bottomNavigationBar: Container(
-        margin: EdgeInsets.symmetric(horizontal: 20.r, vertical: 10.r),
+        margin: EdgeInsets.symmetric(horizontal: 20.r, vertical: 20.r),
         child: CustomButton(
           name: 'Save Change',
           onPressed: () {},
