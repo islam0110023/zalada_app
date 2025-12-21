@@ -73,7 +73,9 @@ class CartPage extends StatelessWidget {
         child: CustomButton(
           name: 'Checkout',
           onPressed: () {
-            context.push(AppRoutes.selectAddress);
+            if (context.read<CartCubit>().carts.isNotEmpty) {
+              context.push(AppRoutes.selectAddress);
+            }
           },
         ),
       ),

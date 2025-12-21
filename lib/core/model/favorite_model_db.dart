@@ -1,11 +1,6 @@
 import 'package:zalada_app/core/model/product_model.dart';
 
 class FavoriteModelDb extends Product {
-  final String id;
-  final String title;
-  final String description;
-  final String image;
-  final num price;
 
   FavoriteModelDb({
     required this.id,
@@ -15,7 +10,6 @@ class FavoriteModelDb extends Product {
     required this.price,
   });
 
-  // تحويل من Map إلى Object
   factory FavoriteModelDb.fromMap(Map<String, dynamic> map) {
     return FavoriteModelDb(
       id: map['id'],
@@ -25,6 +19,16 @@ class FavoriteModelDb extends Product {
       price: map['price'],
     );
   }
+  @override
+  final String id;
+  @override
+  final String title;
+  @override
+  final String description;
+  @override
+  final String image;
+  @override
+  final num price;
 
   // تحويل من Object إلى Map
   Map<String, dynamic> toMap() {
