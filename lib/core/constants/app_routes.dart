@@ -1,4 +1,6 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:zalada_app/feature/auth/logic/auth_cubit.dart';
 import 'package:zalada_app/feature/auth/presentation/login_page.dart';
 import 'package:zalada_app/feature/auth/presentation/otp_page.dart';
 import 'package:zalada_app/feature/auth/presentation/register_page.dart';
@@ -48,11 +50,17 @@ class AppRoutes {
       ),
       GoRoute(
         path: login,
-        builder: (context, state) => const LoginPage(),
+        builder: (context, state) => BlocProvider(
+          create: (context) => AuthCubit(),
+          child: const LoginPage(),
+        ),
       ),
       GoRoute(
         path: register,
-        builder: (context, state) => const RegisterPage(),
+        builder: (context, state) => BlocProvider(
+          create: (context) => AuthCubit(),
+          child: const RegisterPage(),
+        ),
       ),
       GoRoute(
         path: otp,

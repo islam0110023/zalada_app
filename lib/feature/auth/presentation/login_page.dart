@@ -5,230 +5,214 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:zalada_app/core/constants/app_colors.dart';
 import 'package:zalada_app/core/constants/app_routes.dart';
+import 'package:zalada_app/core/constants/data.dart';
 import 'package:zalada_app/core/widget/custom_button.dart';
 import 'package:zalada_app/core/widget/custom_text_input.dart';
 import 'package:zalada_app/feature/auth/logic/auth_cubit.dart';
 import 'package:zalada_app/feature/auth/presentation/widget/custom_bottom_sheet.dart';
 
-class LoginPage extends StatefulWidget {
+class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
 
   static const id = 'LoginPage';
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
-}
-
-class _LoginPageState extends State<LoginPage> {
-  TextEditingController emailController = TextEditingController();
-
-  TextEditingController passwordController = TextEditingController();
-
-  bool isLoading = false;
-
-  @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => AuthCubit(),
-      child: Scaffold(
-        body: SafeArea(
-          child: BlocConsumer<AuthCubit, AuthState>(
+    final cubit = context.read<AuthCubit>();
+    final state = context.watch<AuthCubit>();
+
+    return Scaffold(
+      body: SafeArea(
+        child: BlocListener<AuthCubit, AuthState>(
             listener: (context, state) {
               if (state is LoginLoaded) {
-                isLoading = false;
-                setState(() {});
+                if (context.canPop()) {
+                  context.pop();
+                }
                 ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(content: Text('Success Login')));
 
                 context.go(AppRoutes.home);
               }
               if (state is LoginLoading) {
-                isLoading = true;
-                setState(() {});
+                ListData.showLoadingDialog(context);
               }
               if (state is LoginFailure) {
-                isLoading = false;
-                setState(() {});
+                if (context.canPop()) {
+                  context.pop();
+                }
                 ScaffoldMessenger.of(context)
                     .showSnackBar(SnackBar(content: Text(state.error)));
               }
             },
-            builder: (context, state) {
-              final cubit = BlocProvider.of<AuthCubit>(context);
-              return ModalProgressHUD(
-                inAsyncCall: isLoading,
-                child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 20.r),
-                  child: SingleChildScrollView(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(
-                          height: 24.h,
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20.r),
+              child: SingleChildScrollView(
+                child: Form(
+                  key: cubit.formKey,
+                  autovalidateMode: state.autoValidateMode,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        height: 24.h,
+                      ),
+                      SizedBox(
+                        height: 85.h,
+                        child: DefaultTextStyle(
+                          style: GoogleFonts.plusJakartaSans(
+                            color: Colors.black,
+                            fontSize: 32.sp,
+                            height: 1.12.h,
+                            fontWeight: FontWeight.w600,
+                          ),
+                          child: AnimatedTextKit(
+                            animatedTexts: [
+                              TyperAnimatedText('Login to your\naccount.',
+                                  speed: const Duration(milliseconds: 100)),
+                            ],
+                            repeatForever: true,
+                          ),
                         ),
-                        SizedBox(
-                          height: 85.h,
-                          child: DefaultTextStyle(
+                      ),
+                      SizedBox(
+                        height: 32.h,
+                      ),
+                      CustomTextInput(
+                        label: 'Email Address',
+                        hint: 'Email address',
+                        controller: cubit.emailController,
+                        onTap: () {},
+                      ),
+                      SizedBox(
+                        height: 16.h,
+                      ),
+                      CustomTextInput(
+                        label: 'Password',
+                        hint: 'Password',
+                        controller: cubit.passwordController,
+                        isPass: cubit.isPass,
+                        isEmail: false,
+                        onTap: () {
+                          cubit.obscureText();
+                        },
+                      ),
+                      SizedBox(
+                        height: 24.h,
+                      ),
+                      Align(
+                        alignment: Alignment.center,
+                        child: InkWell(
+                          onTap: () {
+                            showModalBottomSheet(
+                              context: context,
+                              backgroundColor: Colors.transparent,
+                              transitionAnimationController:
+                                  AnimationController(
+                                vsync: Navigator.of(context),
+                                duration: const Duration(milliseconds: 999),
+                                reverseDuration:
+                                    const Duration(milliseconds: 999),
+                              ),
+                              builder: (context) {
+                                return const CustomBottomSheet()
+                                    .animate()
+                                    .fade(duration: 999.ms)
+                                    .slideY(begin: 1, end: 0, duration: 800.ms);
+                              },
+                            );
+                          },
+                          child: Text(
+                            'Forget password?',
                             style: GoogleFonts.plusJakartaSans(
-                              color: Colors.black,
-                              fontSize: 32.sp,
-                              height: 1.12.h,
-                              fontWeight: FontWeight.w600,
-                            ),
-                            child: AnimatedTextKit(
-                              animatedTexts: [
-                                TyperAnimatedText('Login to your\naccount.',
-                                    speed: const Duration(milliseconds: 100)),
-                              ],
-                              repeatForever: true,
+                              color: AppColors.textColorBlack,
+                              fontSize: 16.sp,
+                              fontWeight: FontWeight.w400,
+                              height: 1.50.h,
                             ),
                           ),
                         ),
-                        SizedBox(
-                          height: 32.h,
-                        ),
-                        CustomTextInput(
-                          label: 'Email Address',
-                          hint: 'Email address',
-                          controller: emailController,
-                          onTap: () {},
-                        ),
-                        SizedBox(
-                          height: 16.h,
-                        ),
-                        CustomTextInput(
-                          label: 'Password',
-                          hint: 'Password',
-                          controller: passwordController,
-                          isPass: cubit.isPass,
-                          isEmail: false,
+                      ),
+                      SizedBox(
+                        height: 24.h,
+                      ),
+                      CustomButton(
+                        name: 'Login',
+                        onPressed: () {
+                          cubit.login();
+                        },
+                      ),
+                      SizedBox(
+                        height: 24.h,
+                      ),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Divider(
+                              color: AppColors.borderColor,
+                              thickness: 1.sp,
+                            ),
+                          ),
+                          SizedBox(
+                            width: 14.w,
+                          ),
+                          Text(
+                            'or continue with',
+                            style: GoogleFonts.plusJakartaSans(
+                              color: AppColors.textColorSecond,
+                              fontSize: 16.sp,
+                              fontWeight: FontWeight.w500,
+                              height: 1.50.h,
+                            ),
+                          ),
+                          SizedBox(
+                            width: 15.w,
+                          ),
+                          Expanded(
+                            child: Divider(
+                              color: AppColors.borderColor,
+                              thickness: 1.sp,
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 24.h,
+                      ),
+                      Align(
+                        alignment: Alignment.center,
+                        child: InkWell(
                           onTap: () {
-                            cubit.obscureText();
+                            context.replace(AppRoutes.register);
                           },
-                        ),
-                        SizedBox(
-                          height: 24.h,
-                        ),
-                        Align(
-                          alignment: Alignment.center,
-                          child: InkWell(
-                            onTap: () {
-                              showModalBottomSheet(
-                                context: context,
-                                backgroundColor: Colors.transparent,
-                                transitionAnimationController:
-                                    AnimationController(
-                                  vsync: Navigator.of(context),
-                                  duration: const Duration(milliseconds: 999),
-                                  reverseDuration:
-                                      const Duration(milliseconds: 999),
-                                ),
-                                builder: (context) {
-                                  return const CustomBottomSheet()
-                                      .animate()
-                                      .fade(duration: 999.ms)
-                                      .slideY(
-                                          begin: 1, end: 0, duration: 800.ms);
-                                },
-                              );
-                            },
-                            child: Text(
-                              'Forget password?',
+                          child: Text.rich(TextSpan(children: [
+                            TextSpan(
+                              text: "Don't have an account? ",
                               style: GoogleFonts.plusJakartaSans(
-                                color: AppColors.textColorBlack,
+                                color: const Color(0xFF7C7D81),
                                 fontSize: 16.sp,
                                 fontWeight: FontWeight.w400,
                                 height: 1.50.h,
                               ),
                             ),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 24.h,
-                        ),
-                        CustomButton(
-                          name: 'Login',
-                          onPressed: () {
-                            cubit.login(
-                                userName: emailController.text,
-                                password: passwordController.text);
-                          },
-                        ),
-                        SizedBox(
-                          height: 24.h,
-                        ),
-                        Row(
-                          children: [
-                            Expanded(
-                              child: Divider(
-                                color: AppColors.borderColor,
-                                thickness: 1.sp,
-                              ),
-                            ),
-                            SizedBox(
-                              width: 14.w,
-                            ),
-                            Text(
-                              'or continue with',
-                              style: GoogleFonts.plusJakartaSans(
-                                color: AppColors.textColorSecond,
-                                fontSize: 16.sp,
-                                fontWeight: FontWeight.w500,
-                                height: 1.50.h,
-                              ),
-                            ),
-                            SizedBox(
-                              width: 15.w,
-                            ),
-                            Expanded(
-                              child: Divider(
-                                color: AppColors.borderColor,
-                                thickness: 1.sp,
-                              ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 24.h,
-                        ),
-                        Align(
-                          alignment: Alignment.center,
-                          child: InkWell(
-                            onTap: () {
-                              context.replace(AppRoutes.register);
-                            },
-                            child: Text.rich(TextSpan(children: [
-                              TextSpan(
-                                text: "Don't have an account? ",
+                            TextSpan(
+                                text: 'Register',
                                 style: GoogleFonts.plusJakartaSans(
-                                  color: const Color(0xFF7C7D81),
+                                  color: AppColors.textColorThree,
                                   fontSize: 16.sp,
-                                  fontWeight: FontWeight.w400,
+                                  fontWeight: FontWeight.w600,
                                   height: 1.50.h,
-                                ),
-                              ),
-                              TextSpan(
-                                  text: 'Register',
-                                  style: GoogleFonts.plusJakartaSans(
-                                    color: AppColors.textColorThree,
-                                    fontSize: 16.sp,
-                                    fontWeight: FontWeight.w600,
-                                    height: 1.50.h,
-                                  ))
-                            ])),
-                          ),
+                                ))
+                          ])),
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
-              );
-            },
-          ),
-        ),
+              ),
+            )),
       ),
     )
         .animate()

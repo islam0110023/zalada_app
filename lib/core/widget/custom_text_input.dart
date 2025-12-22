@@ -50,6 +50,12 @@ class CustomTextInput extends StatelessWidget {
           inputFormatters: [
             LengthLimitingTextInputFormatter(maxLength),
           ],
+          validator: (value) {
+            if (value == null || value.isEmpty) {
+              return 'This field is required';
+            }
+            return null;
+          },
           readOnly: readOnly,
           onTap: onPressed ?? () {},
           obscureText: isPass,
